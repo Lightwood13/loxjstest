@@ -110,6 +110,17 @@
   UninitializedPropertyAccessException.prototype = Object.create(RuntimeException.prototype);
   UninitializedPropertyAccessException.prototype.constructor = UninitializedPropertyAccessException;
   //endregion
+  function toSet(_this__1828080292) {
+    var tmp0_subject = _this__1828080292.length;
+    switch (tmp0_subject) {
+      case 0:
+        return emptySet();
+      case 1:
+        return setOf_0(_this__1828080292[0]);
+      default:
+        return toCollection(_this__1828080292, LinkedHashSet_init_$Create$_0(mapCapacity(_this__1828080292.length)));
+    }
+  }
   function toCollection(_this__1828080292, destination) {
     var indexedObject = _this__1828080292;
     var inductionVariable = 0;
@@ -519,7 +530,7 @@
     }
     return destination;
   }
-  function toSet(_this__1828080292) {
+  function toSet_0(_this__1828080292) {
     if (isInterface(_this__1828080292, Collection)) {
       var tmp0_subject = _this__1828080292._get_size__809037418_ddoh9m_k$();
       var tmp;
@@ -537,7 +548,7 @@
             }
           }
 
-          tmp = setOf(tmp_0);
+          tmp = setOf_0(tmp_0);
           break;
         default:
           tmp = toCollection_0(_this__1828080292, LinkedHashSet_init_$Create$_0(mapCapacity(_this__1828080292._get_size__809037418_ddoh9m_k$())));
@@ -1300,20 +1311,6 @@
       new EmptyList();
     return EmptyList_instance;
   }
-  function emptyList() {
-    return EmptyList_getInstance();
-  }
-  function optimizeReadOnlyList(_this__1828080292) {
-    var tmp0_subject = _this__1828080292._get_size__809037418_ddoh9m_k$();
-    switch (tmp0_subject) {
-      case 0:
-        return emptyList();
-      case 1:
-        return listOf(_this__1828080292.get_fkrdnv_k$(0));
-      default:
-        return _this__1828080292;
-    }
-  }
   function EmptyIterator() {
     EmptyIterator_instance = this;
   }
@@ -1333,6 +1330,20 @@
     if (EmptyIterator_instance == null)
       new EmptyIterator();
     return EmptyIterator_instance;
+  }
+  function emptyList() {
+    return EmptyList_getInstance();
+  }
+  function optimizeReadOnlyList(_this__1828080292) {
+    var tmp0_subject = _this__1828080292._get_size__809037418_ddoh9m_k$();
+    switch (tmp0_subject) {
+      case 0:
+        return emptyList();
+      case 1:
+        return listOf(_this__1828080292.get_fkrdnv_k$(0));
+      default:
+        return _this__1828080292;
+    }
   }
   function _get_indices__2241594442(_this__1828080292) {
     return numberRangeToNumber(0, _this__1828080292._get_size__809037418_ddoh9m_k$() - 1 | 0);
@@ -1812,6 +1823,9 @@
       new EmptySequence();
     return EmptySequence_instance;
   }
+  function setOf(elements) {
+    return elements.length > 0 ? toSet(elements) : emptySet();
+  }
   function EmptySet() {
     EmptySet_instance = this;
     this.serialVersionUID_1 = new Long(1993859828, 793161749);
@@ -1838,6 +1852,24 @@
   };
   EmptySet.prototype.isEmpty_y1axqb_k$ = function () {
     return true;
+  };
+  EmptySet.prototype.contains_a7ux40_k$ = function (element) {
+    return false;
+  };
+  EmptySet.prototype.contains_2ehdt1_k$ = function (element) {
+    if (!false)
+      return false;
+    else {
+    }
+    var tmp;
+    if (false) {
+      tmp = element;
+    } else {
+      {
+        tmp = THROW_CCE();
+      }
+    }
+    return this.contains_a7ux40_k$(tmp);
   };
   EmptySet.prototype.containsAll_4bfz49_k$ = function (elements) {
     return elements.isEmpty_y1axqb_k$();
@@ -1871,7 +1903,7 @@
       case 0:
         return emptySet();
       case 1:
-        return setOf(_this__1828080292.iterator_jk1svi_k$().next_20eer_k$());
+        return setOf_0(_this__1828080292.iterator_jk1svi_k$().next_20eer_k$());
       default:
         return _this__1828080292;
     }
@@ -3602,7 +3634,7 @@
     }
     return index;
   }
-  function setOf(element) {
+  function setOf_0(element) {
     return hashSetOf([element]);
   }
   function copyToArrayImpl(collection) {
@@ -5764,7 +5796,7 @@
   function Regex(pattern, options) {
     Companion_getInstance_5();
     this.pattern_1 = pattern;
-    this.options_1 = toSet(options);
+    this.options_1 = toSet_0(options);
     this.nativePattern_1 = new RegExp(pattern, toFlags(options, 'gu'));
     this.nativeStickyPattern_1 = null;
     this.nativeMatchesEntirePattern_1 = null;
@@ -6186,6 +6218,13 @@
     kind: 'interface',
     interfaces: []
   };
+  function Set() {
+  }
+  Set.$metadata$ = {
+    simpleName: 'Set',
+    kind: 'interface',
+    interfaces: [Collection]
+  };
   function MutableEntry() {
   }
   MutableEntry.$metadata$ = {
@@ -6213,13 +6252,6 @@
     simpleName: 'MutableList',
     kind: 'interface',
     interfaces: [List, MutableCollection]
-  };
-  function Set() {
-  }
-  Set.$metadata$ = {
-    simpleName: 'Set',
-    kind: 'interface',
-    interfaces: [Collection]
   };
   function Collection() {
   }
@@ -7979,6 +8011,7 @@
   _.$crossModule$.listOf = listOf;
   _.$crossModule$.mapOf = mapOf;
   _.$crossModule$.plus = plus;
+  _.$crossModule$.setOf = setOf;
   _.$crossModule$.zip = zip;
   _.$crossModule$.captureStack = captureStack;
   _.$crossModule$.charSequenceLength = charSequenceLength;

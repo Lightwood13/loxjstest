@@ -23,6 +23,7 @@
   var charSequenceLength = kotlin_kotlin.$crossModule$.charSequenceLength;
   var Exception_init_$Init$ = kotlin_kotlin.$crossModule$.Exception_init_$Init$;
   var captureStack = kotlin_kotlin.$crossModule$.captureStack;
+  var setOf = kotlin_kotlin.$crossModule$.setOf;
   var getKClassFromExpression = kotlin_kotlin.$crossModule$.getKClassFromExpression;
   var Triple = kotlin_kotlin.$crossModule$.Triple;
   var getKClass = kotlin_kotlin.$crossModule$.getKClass;
@@ -33,6 +34,8 @@
   var collectionSizeOrDefault = kotlin_kotlin.$crossModule$.collectionSizeOrDefault;
   var ArrayList_init_$Create$ = kotlin_kotlin.$crossModule$.ArrayList_init_$Create$;
   var zip = kotlin_kotlin.$crossModule$.zip;
+  var hashCode = kotlin_kotlin.$crossModule$.hashCode;
+  var equals = kotlin_kotlin.$crossModule$.equals;
   var RuntimeException_init_$Create$ = kotlin_kotlin.$crossModule$.RuntimeException_init_$Create$;
   var _get_lastIndex__339712501 = kotlin_kotlin.$crossModule$._get_lastIndex__339712501;
   var Pair = kotlin_kotlin.$crossModule$.Pair;
@@ -46,8 +49,6 @@
   var startsWith$default = kotlin_kotlin.$crossModule$.startsWith$default;
   var toDouble = kotlin_kotlin.$crossModule$.toDouble;
   var Regex_init_$Create$ = kotlin_kotlin.$crossModule$.Regex_init_$Create$;
-  var hashCode = kotlin_kotlin.$crossModule$.hashCode;
-  var equals = kotlin_kotlin.$crossModule$.equals;
   var joinToString$default = kotlin_kotlin.$crossModule$.joinToString$default;
   var trimMargin$default = kotlin_kotlin.$crossModule$.trimMargin$default;
   var listOf = kotlin_kotlin.$crossModule$.listOf;
@@ -65,6 +66,10 @@
   //region block: pre-declaration
   EvaluationException.prototype = Object.create(Exception.prototype);
   EvaluationException.prototype.constructor = EvaluationException;
+  Nothing.prototype = Object.create(ExecutionResult.prototype);
+  Nothing.prototype.constructor = Nothing;
+  Return.prototype = Object.create(ExecutionResult.prototype);
+  Return.prototype.constructor = Return;
   UnmatchedLexerToken.prototype = Object.create(LexerToken.prototype);
   UnmatchedLexerToken.prototype.constructor = UnmatchedLexerToken;
   EOFLexerToken.prototype = Object.create(LexerToken.prototype);
@@ -165,6 +170,8 @@
   VarDeclaration.prototype.constructor = VarDeclaration;
   Statement.prototype = Object.create(Declaration.prototype);
   Statement.prototype.constructor = Statement;
+  ReturnStatement.prototype = Object.create(Statement.prototype);
+  ReturnStatement.prototype.constructor = ReturnStatement;
   IfStatement.prototype = Object.create(Statement.prototype);
   IfStatement.prototype.constructor = IfStatement;
   WhileStatement.prototype = Object.create(Statement.prototype);
@@ -232,7 +239,7 @@
   }
   var mainPrinter;
   function main() {
-    //require('./clike.js');
+    //require('codemirror/mode/clike/clike.js');
     var tmp$ret$0;
     $l$block: {
       var tmp = document.createElement('textarea');
@@ -301,7 +308,7 @@
     _get_codeMirror__2572497407().setOption('lineNumbers', true);
     _get_codeMirror__2572497407().setOption('mode', 'text/x-kotlin');
     _get_codeMirror__2572497407().setSize('100%', '100%');
-    _get_codeMirror__2572497407().setValue('fun test(a, b) {\n    var c = a + b;\n    print c;\n}\n\ntest(1, 5);');
+    _get_codeMirror__2572497407().setValue('fun fib(n) {\n    if (n == 0) return 0;\n    if (n == 1) return 1;\n    return fib(n - 1) + fib(n - 2);\n}\n\nfun print_n_first_fib(n) {\n    for (var i = 0; i < n; i = i + 1) {\n        print(fib(i));\n    }\n}\n\nprint_n_first_fib(10);');
   }
   function main$lambda() {
     return function (it) {
@@ -383,7 +390,7 @@
   function evaluateBinaryOperatorExpression(expression, evaluationEnvironment) {
     init_properties_BinaryOperator_kt_1731735413();
     var operatorType = expression._get_operatorType__924874509_fan9ql_k$();
-    if (operatorType.equals(OperatorType_And_getInstance()) ? true : operatorType.equals(OperatorType_Or_getInstance())) {
+    if (setOf([OperatorType_And_getInstance(), OperatorType_Or_getInstance()]).contains_2ehdt1_k$(operatorType)) {
       return evaluateLogicalBinaryOperatorExpression(expression, evaluationEnvironment);
     }
     var lhs = evaluateExpression(expression._get_lhs__857172218_e6c6be_k$(), evaluationEnvironment);
@@ -404,7 +411,7 @@
     var lhsResult = evaluateExpression(expression._get_lhs__857172218_e6c6be_k$(), evaluationEnvironment);
     validateRuntimeBoolean(lhsResult);
     var tmp;
-    if (((expression._get_operatorType__924874509_fan9ql_k$().equals(OperatorType_Or_getInstance()) ? lhsResult._get_value__3683422336_a43j40_k$() : false) ? expression._get_operatorType__924874509_fan9ql_k$().equals(OperatorType_And_getInstance()) : false) ? !lhsResult._get_value__3683422336_a43j40_k$() : false) {
+    if ((expression._get_operatorType__924874509_fan9ql_k$().equals(OperatorType_Or_getInstance()) ? lhsResult._get_value__3683422336_a43j40_k$() : false) ? true : expression._get_operatorType__924874509_fan9ql_k$().equals(OperatorType_And_getInstance()) ? !lhsResult._get_value__3683422336_a43j40_k$() : false) {
       tmp = lhsResult;
     } else {
       var rhsResult = evaluateExpression(expression._get_rhs__857350964_e6g08k_k$(), evaluationEnvironment);
@@ -881,177 +888,6 @@
     kind: 'class',
     interfaces: []
   };
-  function executeDeclaration(declaration, evaluationEnvironment) {
-    var tmp0_subject = declaration;
-    if (tmp0_subject instanceof VarDeclaration)
-      executeVarDeclaration(declaration, evaluationEnvironment);
-    else {
-      if (tmp0_subject instanceof Statement)
-        executeStatement(declaration, evaluationEnvironment);
-      else {
-      }
-    }
-  }
-  function executeVarDeclaration(declaration, evaluationEnvironment) {
-    var tmp0_safe_receiver = declaration._get_value__3683422336_a43j40_k$();
-    var tmp;
-    if (tmp0_safe_receiver == null) {
-      tmp = null;
-    } else {
-      var tmp$ret$1;
-      $l$block_0: {
-        {
-        }
-        var tmp$ret$0;
-        $l$block: {
-          tmp$ret$0 = evaluateExpression(tmp0_safe_receiver, evaluationEnvironment);
-          break $l$block;
-        }
-        tmp$ret$1 = tmp$ret$0;
-        break $l$block_0;
-      }
-      tmp = tmp$ret$1;
-    }
-    var tmp1_elvis_lhs = tmp;
-    var variableValue = tmp1_elvis_lhs == null ? NilValue_getInstance() : tmp1_elvis_lhs;
-    evaluationEnvironment.createVariable_atcu8f_k$(declaration._get_identifier__3776854274_8kgyke_k$(), variableValue);
-  }
-  function executeStatement(statement, evaluationEnvironment) {
-    var tmp0_subject = statement;
-    if (tmp0_subject instanceof ExpressionStatement) {
-      evaluateExpression(statement._get_expr__796545782_d68qnq_k$(), evaluationEnvironment);
-      Unit_getInstance();
-    } else {
-      if (tmp0_subject instanceof PrintStatement)
-        executePrintStatement(statement, evaluationEnvironment);
-      else {
-        if (tmp0_subject instanceof BlockStatement)
-          executeBlockStatement(statement, evaluationEnvironment);
-        else {
-          if (tmp0_subject instanceof IfStatement)
-            executeIfStatement(statement, evaluationEnvironment);
-          else {
-            if (tmp0_subject instanceof WhileStatement)
-              executeWhileStatement(statement, evaluationEnvironment);
-            else {
-              if (tmp0_subject instanceof ForStatement)
-                executeForStatement(statement, evaluationEnvironment);
-              else {
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  function executePrintStatement(statement, evaluationEnvironment) {
-    var tmp$ret$0;
-    $l$block: {
-      var tmp0_let_0 = asString(evaluateExpression(statement._get_expr__796545782_d68qnq_k$(), evaluationEnvironment));
-      {
-      }
-      tmp$ret$0 = _get_mainPrinter__3116406160().print_mp71d1_k$(tmp0_let_0);
-      break $l$block;
-    }
-  }
-  function executeBlockStatement(statement, evaluationEnvironment) {
-    var blockEnvironment = new Environment(evaluationEnvironment);
-    var tmp0_iterator = statement._get_declarations__260996658_4be2b6_k$().iterator_jk1svi_k$();
-    while (tmp0_iterator.hasNext_bitz1p_k$()) {
-      var declaration = tmp0_iterator.next_20eer_k$();
-      executeDeclaration(declaration, blockEnvironment);
-    }
-  }
-  function executeIfStatement(statement, evaluationEnvironment) {
-    var conditionValue = evaluateExpression(statement._get_condition__2056333462_y0ad1y_k$(), evaluationEnvironment);
-    validateRuntimeBoolean(conditionValue);
-    var body = conditionValue._get_value__3683422336_a43j40_k$() ? statement._get_body__793495785_d4fd9l_k$() : statement._get_elseBody__502126768_8aybhs_k$();
-    var tmp0_safe_receiver = body;
-    if (tmp0_safe_receiver == null)
-      null;
-    else {
-      var tmp$ret$0;
-      $l$block: {
-        {
-        }
-        tmp$ret$0 = executeStatement(tmp0_safe_receiver, evaluationEnvironment);
-        break $l$block;
-      }
-      Unit_getInstance();
-    }
-    Unit_getInstance();
-  }
-  function executeWhileStatement(statement, evaluationEnvironment) {
-    $l$loop: while (true) {
-      var condition = evaluateExpression(statement._get_condition__2056333462_y0ad1y_k$(), evaluationEnvironment);
-      validateRuntimeBoolean(condition);
-      if (!condition._get_value__3683422336_a43j40_k$())
-        break $l$loop;
-      executeStatement(statement._get_body__793495785_d4fd9l_k$(), evaluationEnvironment);
-    }
-  }
-  function executeForStatement(statement, evaluationEnvironment) {
-    var forEnvironment = new Environment(evaluationEnvironment);
-    var tmp0_safe_receiver = statement._get_initializer__1254092527_kqnjzj_k$();
-    if (tmp0_safe_receiver == null)
-      null;
-    else {
-      var tmp$ret$0;
-      $l$block: {
-        {
-        }
-        tmp$ret$0 = executeDeclaration(tmp0_safe_receiver, forEnvironment);
-        break $l$block;
-      }
-      Unit_getInstance();
-    }
-    Unit_getInstance();
-    $l$loop: while (true) {
-      var tmp1_safe_receiver = statement._get_condition__2056333462_y0ad1y_k$();
-      var tmp;
-      if (tmp1_safe_receiver == null) {
-        tmp = null;
-      } else {
-        var tmp$ret$2;
-        $l$block_1: {
-          {
-          }
-          var tmp$ret$1;
-          $l$block_0: {
-            tmp$ret$1 = evaluateExpression(tmp1_safe_receiver, forEnvironment);
-            break $l$block_0;
-          }
-          tmp$ret$2 = tmp$ret$1;
-          break $l$block_1;
-        }
-        tmp = tmp$ret$2;
-      }
-      var tmp2_elvis_lhs = tmp;
-      var condition = tmp2_elvis_lhs == null ? new BooleanValue(true) : tmp2_elvis_lhs;
-      validateRuntimeBoolean(condition);
-      if (!condition._get_value__3683422336_a43j40_k$())
-        break $l$loop;
-      executeStatement(statement._get_body__793495785_d4fd9l_k$(), forEnvironment);
-      var tmp3_safe_receiver = statement._get_increment__112710850_1v3s8y_k$();
-      if (tmp3_safe_receiver == null)
-        null;
-      else {
-        var tmp$ret$4;
-        $l$block_3: {
-          {
-          }
-          var tmp$ret$3;
-          $l$block_2: {
-            tmp$ret$3 = evaluateExpression(tmp3_safe_receiver, forEnvironment);
-            break $l$block_2;
-          }
-          tmp$ret$4 = tmp$ret$3;
-          break $l$block_3;
-        }
-      }
-      Unit_getInstance();
-    }
-  }
   function evaluateExpression(expr, evaluationEnvironment) {
     var tmp0_subject = expr;
     var tmp;
@@ -1135,8 +971,20 @@
         }
       }
     }
-    executeBlockStatement(functionValue._get_body__793495785_d4fd9l_k$(), functionEnvironment);
-    return NilValue_getInstance();
+    var result = executeBlockStatement(functionValue._get_body__793495785_d4fd9l_k$(), functionEnvironment);
+    var tmp_1;
+    if (result instanceof Nothing) {
+      tmp_1 = NilValue_getInstance();
+    } else {
+      if (result instanceof Return) {
+        tmp_1 = result._get_value__3683422336_a43j40_k$();
+      } else {
+        {
+          noWhenBranchMatchedException();
+        }
+      }
+    }
+    return tmp_1;
   }
   function evaluateAssignmentExpression(expr, evaluationEnvironment) {
     var tmp$ret$0;
@@ -1162,6 +1010,309 @@
       return 'Expected ' + $functionValue._get_argNumber__4293816562_onwu_k$() + ' arguments, but got ' + $expr._get_arguments__15705019_9cm2j_k$()._get_size__809037418_ddoh9m_k$();
     };
   }
+  function ExecutionResult() {
+  }
+  ExecutionResult.$metadata$ = {
+    simpleName: 'ExecutionResult',
+    kind: 'class',
+    interfaces: []
+  };
+  function Nothing() {
+    Nothing_instance = this;
+    ExecutionResult.call(this);
+  }
+  Nothing.$metadata$ = {
+    simpleName: 'Nothing',
+    kind: 'object',
+    interfaces: []
+  };
+  var Nothing_instance;
+  function Nothing_getInstance() {
+    if (Nothing_instance == null)
+      new Nothing();
+    return Nothing_instance;
+  }
+  function Return(value) {
+    ExecutionResult.call(this);
+    this.value_1 = value;
+  }
+  Return.prototype._get_value__3683422336_a43j40_k$ = function () {
+    return this.value_1;
+  };
+  Return.prototype.toString = function () {
+    return 'Return(value=' + this.value_1 + ')';
+  };
+  Return.prototype.hashCode = function () {
+    return hashCode(this.value_1);
+  };
+  Return.prototype.equals = function (other) {
+    if (this === other)
+      return true;
+    if (!(other instanceof Return))
+      return false;
+    else {
+    }
+    var tmp0_other_with_cast = other instanceof Return ? other : THROW_CCE();
+    if (!equals(this.value_1, tmp0_other_with_cast.value_1))
+      return false;
+    return true;
+  };
+  Return.$metadata$ = {
+    simpleName: 'Return',
+    kind: 'class',
+    interfaces: []
+  };
+  function executeDeclaration(declaration, evaluationEnvironment) {
+    var tmp0_subject = declaration;
+    var tmp;
+    if (tmp0_subject instanceof VarDeclaration) {
+      tmp = executeVarDeclaration(declaration, evaluationEnvironment);
+    } else {
+      if (tmp0_subject instanceof Statement) {
+        tmp = executeStatement(declaration, evaluationEnvironment);
+      } else {
+        {
+          noWhenBranchMatchedException();
+        }
+      }
+    }
+    return tmp;
+  }
+  function executeVarDeclaration(declaration, evaluationEnvironment) {
+    var tmp0_safe_receiver = declaration._get_value__3683422336_a43j40_k$();
+    var tmp;
+    if (tmp0_safe_receiver == null) {
+      tmp = null;
+    } else {
+      var tmp$ret$1;
+      $l$block_0: {
+        {
+        }
+        var tmp$ret$0;
+        $l$block: {
+          tmp$ret$0 = evaluateExpression(tmp0_safe_receiver, evaluationEnvironment);
+          break $l$block;
+        }
+        tmp$ret$1 = tmp$ret$0;
+        break $l$block_0;
+      }
+      tmp = tmp$ret$1;
+    }
+    var tmp1_elvis_lhs = tmp;
+    var variableValue = tmp1_elvis_lhs == null ? NilValue_getInstance() : tmp1_elvis_lhs;
+    evaluationEnvironment.createVariable_atcu8f_k$(declaration._get_identifier__3776854274_8kgyke_k$(), variableValue);
+    return Nothing_getInstance();
+  }
+  function executeStatement(statement, evaluationEnvironment) {
+    var tmp0_subject = statement;
+    var tmp;
+    if (tmp0_subject instanceof ExpressionStatement) {
+      var tmp$ret$1;
+      $l$block_0: {
+        var tmp0_let_0 = evaluateExpression(statement._get_expr__796545782_d68qnq_k$(), evaluationEnvironment);
+        {
+        }
+        var tmp$ret$0;
+        $l$block: {
+          tmp$ret$0 = Nothing_getInstance();
+          break $l$block;
+        }
+        tmp$ret$1 = tmp$ret$0;
+        break $l$block_0;
+      }
+      tmp = tmp$ret$1;
+    } else {
+      if (tmp0_subject instanceof PrintStatement) {
+        tmp = executePrintStatement(statement, evaluationEnvironment);
+      } else {
+        if (tmp0_subject instanceof BlockStatement) {
+          tmp = executeBlockStatement(statement, evaluationEnvironment);
+        } else {
+          if (tmp0_subject instanceof IfStatement) {
+            tmp = executeIfStatement(statement, evaluationEnvironment);
+          } else {
+            if (tmp0_subject instanceof WhileStatement) {
+              tmp = executeWhileStatement(statement, evaluationEnvironment);
+            } else {
+              if (tmp0_subject instanceof ForStatement) {
+                tmp = executeForStatement(statement, evaluationEnvironment);
+              } else {
+                if (tmp0_subject instanceof ReturnStatement) {
+                  tmp = executeReturnStatement(statement, evaluationEnvironment);
+                } else {
+                  {
+                    noWhenBranchMatchedException();
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    return tmp;
+  }
+  function executePrintStatement(statement, evaluationEnvironment) {
+    var tmp$ret$2;
+    $l$block_1: {
+      var tmp$ret$0;
+      $l$block: {
+        var tmp0_also_0 = asString(evaluateExpression(statement._get_expr__796545782_d68qnq_k$(), evaluationEnvironment));
+        var tmp1_also = _get_mainPrinter__3116406160();
+        {
+        }
+        tmp1_also.print_mp71d1_k$(tmp0_also_0);
+        tmp$ret$0 = tmp0_also_0;
+        break $l$block;
+      }
+      var tmp2_let_0 = tmp$ret$0;
+      {
+      }
+      var tmp$ret$1;
+      $l$block_0: {
+        tmp$ret$1 = Nothing_getInstance();
+        break $l$block_0;
+      }
+      tmp$ret$2 = tmp$ret$1;
+      break $l$block_1;
+    }
+    return tmp$ret$2;
+  }
+  function executeBlockStatement(statement, evaluationEnvironment) {
+    var blockEnvironment = new Environment(evaluationEnvironment);
+    var tmp0_iterator = statement._get_declarations__260996658_4be2b6_k$().iterator_jk1svi_k$();
+    while (tmp0_iterator.hasNext_bitz1p_k$()) {
+      var declaration = tmp0_iterator.next_20eer_k$();
+      var result = executeDeclaration(declaration, blockEnvironment);
+      if (result instanceof Return)
+        return result;
+      else {
+      }
+    }
+    return Nothing_getInstance();
+  }
+  function executeIfStatement(statement, evaluationEnvironment) {
+    var conditionValue = evaluateExpression(statement._get_condition__2056333462_y0ad1y_k$(), evaluationEnvironment);
+    validateRuntimeBoolean(conditionValue);
+    var body = conditionValue._get_value__3683422336_a43j40_k$() ? statement._get_body__793495785_d4fd9l_k$() : statement._get_elseBody__502126768_8aybhs_k$();
+    var tmp0_safe_receiver = body;
+    var tmp;
+    if (tmp0_safe_receiver == null) {
+      tmp = null;
+    } else {
+      var tmp$ret$1;
+      $l$block_0: {
+        {
+        }
+        var tmp$ret$0;
+        $l$block: {
+          tmp$ret$0 = executeStatement(tmp0_safe_receiver, evaluationEnvironment);
+          break $l$block;
+        }
+        tmp$ret$1 = tmp$ret$0;
+        break $l$block_0;
+      }
+      tmp = tmp$ret$1;
+    }
+    var tmp1_elvis_lhs = tmp;
+    return tmp1_elvis_lhs == null ? Nothing_getInstance() : tmp1_elvis_lhs;
+  }
+  function executeWhileStatement(statement, evaluationEnvironment) {
+    $l$loop: while (true) {
+      var condition = evaluateExpression(statement._get_condition__2056333462_y0ad1y_k$(), evaluationEnvironment);
+      validateRuntimeBoolean(condition);
+      if (!condition._get_value__3683422336_a43j40_k$())
+        break $l$loop;
+      var result = executeStatement(statement._get_body__793495785_d4fd9l_k$(), evaluationEnvironment);
+      if (result instanceof Return)
+        return result;
+      else {
+      }
+    }
+    return Nothing_getInstance();
+  }
+  function executeForStatement(statement, evaluationEnvironment) {
+    var forEnvironment = new Environment(evaluationEnvironment);
+    var tmp0_safe_receiver = statement._get_initializer__1254092527_kqnjzj_k$();
+    if (tmp0_safe_receiver == null)
+      null;
+    else {
+      var tmp$ret$1;
+      $l$block_0: {
+        {
+        }
+        var tmp$ret$0;
+        $l$block: {
+          tmp$ret$0 = executeDeclaration(tmp0_safe_receiver, forEnvironment);
+          break $l$block;
+        }
+        tmp$ret$1 = tmp$ret$0;
+        break $l$block_0;
+      }
+    }
+    Unit_getInstance();
+    $l$loop: while (true) {
+      var tmp1_safe_receiver = statement._get_condition__2056333462_y0ad1y_k$();
+      var tmp;
+      if (tmp1_safe_receiver == null) {
+        tmp = null;
+      } else {
+        var tmp$ret$3;
+        $l$block_2: {
+          {
+          }
+          var tmp$ret$2;
+          $l$block_1: {
+            tmp$ret$2 = evaluateExpression(tmp1_safe_receiver, forEnvironment);
+            break $l$block_1;
+          }
+          tmp$ret$3 = tmp$ret$2;
+          break $l$block_2;
+        }
+        tmp = tmp$ret$3;
+      }
+      var tmp2_elvis_lhs = tmp;
+      var condition = tmp2_elvis_lhs == null ? new BooleanValue(true) : tmp2_elvis_lhs;
+      validateRuntimeBoolean(condition);
+      if (!condition._get_value__3683422336_a43j40_k$())
+        break $l$loop;
+      var result = executeStatement(statement._get_body__793495785_d4fd9l_k$(), forEnvironment);
+      if (result instanceof Return)
+        return result;
+      else {
+      }
+      var tmp3_safe_receiver = statement._get_increment__112710850_1v3s8y_k$();
+      if (tmp3_safe_receiver == null)
+        null;
+      else {
+        var tmp$ret$5;
+        $l$block_4: {
+          {
+          }
+          var tmp$ret$4;
+          $l$block_3: {
+            tmp$ret$4 = evaluateExpression(tmp3_safe_receiver, forEnvironment);
+            break $l$block_3;
+          }
+          tmp$ret$5 = tmp$ret$4;
+          break $l$block_4;
+        }
+      }
+      Unit_getInstance();
+    }
+    return Nothing_getInstance();
+  }
+  function executeReturnStatement(statement, evaluationEnvironment) {
+    var tmp$ret$0;
+    $l$block: {
+      var tmp0_let_0 = evaluateExpression(statement._get_expr__796545782_d68qnq_k$(), evaluationEnvironment);
+      {
+      }
+      tmp$ret$0 = new Return(tmp0_let_0);
+      break $l$block;
+    }
+    return tmp$ret$0;
+  }
   function interpret(program) {
     var initialContext = toParsingContext(tokenize(program));
     var matchResult = _get_programRule__2915460593().match_mgqn9o_k$(initialContext);
@@ -1177,6 +1328,7 @@
     while (tmp0_iterator.hasNext_bitz1p_k$()) {
       var declaration = tmp0_iterator.next_20eer_k$();
       executeDeclaration(declaration, globalEnvironment);
+      Unit_getInstance();
     }
     var finalContext = matchResult._get_newCtx__4130049924_2q6r24_k$();
     if (!(finalContext._get_currentIndex__1690914194_ryq5qq_k$() === _get_lastIndex__339712501(initialContext._get_tokens__1141353649_ivj641_k$()))) {
@@ -2801,6 +2953,36 @@
     kind: 'class',
     interfaces: []
   };
+  function ReturnStatement(expr) {
+    Statement.call(this);
+    this.expr_1 = expr;
+  }
+  ReturnStatement.prototype._get_expr__796545782_d68qnq_k$ = function () {
+    return this.expr_1;
+  };
+  ReturnStatement.prototype.toString = function () {
+    return 'ReturnStatement(expr=' + this.expr_1 + ')';
+  };
+  ReturnStatement.prototype.hashCode = function () {
+    return hashCode(this.expr_1);
+  };
+  ReturnStatement.prototype.equals = function (other) {
+    if (this === other)
+      return true;
+    if (!(other instanceof ReturnStatement))
+      return false;
+    else {
+    }
+    var tmp0_other_with_cast = other instanceof ReturnStatement ? other : THROW_CCE();
+    if (!equals(this.expr_1, tmp0_other_with_cast.expr_1))
+      return false;
+    return true;
+  };
+  ReturnStatement.$metadata$ = {
+    simpleName: 'ReturnStatement',
+    kind: 'class',
+    interfaces: []
+  };
   function IfStatement(condition, body, elseBody) {
     Statement.call(this);
     this.condition_1 = condition;
@@ -4017,15 +4199,15 @@
       $l$block_1: {
         var tmp$ret$1;
         $l$block_0: {
-          var tmp0_filterNotTo_0_1 = ArrayList_init_$Create$_0();
-          var tmp0_iterator_1_2 = tokens.iterator_jk1svi_k$();
-          while (tmp0_iterator_1_2.hasNext_bitz1p_k$()) {
-            var element_2_3 = tmp0_iterator_1_2.next_20eer_k$();
+          var tmp0_filterNotTo_0_1_3 = ArrayList_init_$Create$_0();
+          var tmp0_iterator_1_2_4 = tokens.iterator_jk1svi_k$();
+          while (tmp0_iterator_1_2_4.hasNext_bitz1p_k$()) {
+            var element_2_3_5 = tmp0_iterator_1_2_4.next_20eer_k$();
             var tmp$ret$0;
             $l$block: {
               var tmp;
-              if (element_2_3 instanceof SymbolicToken) {
-                var tmp_0 = element_2_3._get_lexerToken__1629285342_qy18m6_k$();
+              if (element_2_3_5 instanceof SymbolicToken) {
+                var tmp_0 = element_2_3_5._get_lexerToken__1629285342_qy18m6_k$();
                 tmp = tmp_0 instanceof CommaLexerToken;
               } else {
                 {
@@ -4036,24 +4218,24 @@
               break $l$block;
             }
             if (!tmp$ret$0) {
-              tmp0_filterNotTo_0_1.add_1j60pz_k$(element_2_3);
+              tmp0_filterNotTo_0_1_3.add_1j60pz_k$(element_2_3_5);
               Unit_getInstance();
             } else {
             }
           }
-          tmp$ret$1 = tmp0_filterNotTo_0_1;
+          tmp$ret$1 = tmp0_filterNotTo_0_1_3;
           break $l$block_0;
         }
         tmp$ret$2 = tmp$ret$1;
         break $l$block_1;
       }
-      var arguments_0 = tmp$ret$2;
+      var arguments_2 = tmp$ret$2;
       Unit_getInstance();
       var tmp$ret$3;
       $l$block_5: {
         var tmp_1;
-        if (isInterface(arguments_0, Collection)) {
-          tmp_1 = arguments_0.isEmpty_y1axqb_k$();
+        if (isInterface(arguments_2, Collection)) {
+          tmp_1 = arguments_2.isEmpty_y1axqb_k$();
         } else {
           {
             tmp_1 = false;
@@ -4064,14 +4246,14 @@
           break $l$block_5;
         } else {
         }
-        var tmp0_iterator_1 = arguments_0.iterator_jk1svi_k$();
-        while (tmp0_iterator_1.hasNext_bitz1p_k$()) {
-          var element_2 = tmp0_iterator_1.next_20eer_k$();
+        var tmp0_iterator_1_6 = arguments_2.iterator_jk1svi_k$();
+        while (tmp0_iterator_1_6.hasNext_bitz1p_k$()) {
+          var element_2_7 = tmp0_iterator_1_6.next_20eer_k$();
           var tmp$ret$4;
           $l$block_3: {
             var tmp_2;
-            if (element_2 instanceof NodeToken) {
-              var tmp_3 = element_2._get_node__804577417_db0vwp_k$();
+            if (element_2_7 instanceof NodeToken) {
+              var tmp_3 = element_2_7._get_node__804577417_db0vwp_k$();
               tmp_2 = tmp_3 instanceof IdentifierExpression;
             } else {
               {
@@ -4091,7 +4273,7 @@
         break $l$block_5;
       }
       validateGrammar(tmp$ret$3);
-      return new CompositeToken(arguments_0);
+      return new CompositeToken(arguments_2);
     };
   }
   function intermediateBlockStatementRule$lambda() {
@@ -4206,15 +4388,15 @@
       $l$block_1: {
         var tmp$ret$1;
         $l$block_0: {
-          var tmp0_filterNotTo_0_1 = ArrayList_init_$Create$_0();
-          var tmp0_iterator_1_2 = tokens.iterator_jk1svi_k$();
-          while (tmp0_iterator_1_2.hasNext_bitz1p_k$()) {
-            var element_2_3 = tmp0_iterator_1_2.next_20eer_k$();
+          var tmp0_filterNotTo_0_1_3 = ArrayList_init_$Create$_0();
+          var tmp0_iterator_1_2_4 = tokens.iterator_jk1svi_k$();
+          while (tmp0_iterator_1_2_4.hasNext_bitz1p_k$()) {
+            var element_2_3_5 = tmp0_iterator_1_2_4.next_20eer_k$();
             var tmp$ret$0;
             $l$block: {
               var tmp;
-              if (element_2_3 instanceof SymbolicToken) {
-                var tmp_0 = element_2_3._get_lexerToken__1629285342_qy18m6_k$();
+              if (element_2_3_5 instanceof SymbolicToken) {
+                var tmp_0 = element_2_3_5._get_lexerToken__1629285342_qy18m6_k$();
                 tmp = tmp_0 instanceof CommaLexerToken;
               } else {
                 {
@@ -4225,24 +4407,24 @@
               break $l$block;
             }
             if (!tmp$ret$0) {
-              tmp0_filterNotTo_0_1.add_1j60pz_k$(element_2_3);
+              tmp0_filterNotTo_0_1_3.add_1j60pz_k$(element_2_3_5);
               Unit_getInstance();
             } else {
             }
           }
-          tmp$ret$1 = tmp0_filterNotTo_0_1;
+          tmp$ret$1 = tmp0_filterNotTo_0_1_3;
           break $l$block_0;
         }
         tmp$ret$2 = tmp$ret$1;
         break $l$block_1;
       }
-      var arguments_0 = tmp$ret$2;
+      var arguments_2 = tmp$ret$2;
       Unit_getInstance();
       var tmp$ret$3;
       $l$block_5: {
         var tmp_1;
-        if (isInterface(arguments_0, Collection)) {
-          tmp_1 = arguments_0.isEmpty_y1axqb_k$();
+        if (isInterface(arguments_2, Collection)) {
+          tmp_1 = arguments_2.isEmpty_y1axqb_k$();
         } else {
           {
             tmp_1 = false;
@@ -4253,14 +4435,14 @@
           break $l$block_5;
         } else {
         }
-        var tmp0_iterator_1 = arguments_0.iterator_jk1svi_k$();
-        while (tmp0_iterator_1.hasNext_bitz1p_k$()) {
-          var element_2 = tmp0_iterator_1.next_20eer_k$();
+        var tmp0_iterator_1_6 = arguments_2.iterator_jk1svi_k$();
+        while (tmp0_iterator_1_6.hasNext_bitz1p_k$()) {
+          var element_2_7 = tmp0_iterator_1_6.next_20eer_k$();
           var tmp$ret$4;
           $l$block_3: {
             var tmp_2;
-            if (element_2 instanceof NodeToken) {
-              var tmp_3 = element_2._get_node__804577417_db0vwp_k$();
+            if (element_2_7 instanceof NodeToken) {
+              var tmp_3 = element_2_7._get_node__804577417_db0vwp_k$();
               tmp_2 = tmp_3 instanceof Expression;
             } else {
               {
@@ -4280,7 +4462,7 @@
         break $l$block_5;
       }
       validateGrammar(tmp$ret$3);
-      return new CompositeToken(arguments_0);
+      return new CompositeToken(arguments_2);
     };
   }
   function callRule$lambda() {
@@ -4387,18 +4569,28 @@
   function init_properties_Function_kt_2381206722() {
     if (!properties_initialized_Function_kt_2691085286) {
       properties_initialized_Function_kt_2691085286 = true;
-      var tmp = _get_identifierRule__1187417958();
-      var tmp_0 = _get_commaRule__3746010368();
-      argumentsDeclarationRule = binaryOperatorRule_0(tmp, tmp_0, argumentsDeclarationRule$lambda());
-      var tmp_1 = intermediateBlockStatementRule$lambda();
-      intermediateBlockStatementRule = new sam$parser_Rule$0_7(tmp_1);
-      var tmp_2 = [_get_funKeywordRule__4178608453(), _get_identifierRule__1187417958(), _get_leftParenRule__1902601682(), optionalRule(_get_argumentsDeclarationRule__3232159339()), _get_rightParenRule__1732469473(), _get_intermediateBlockStatementRule__496927892()];
-      functionDeclarationRule = andRule(tmp_2, functionDeclarationRule$lambda());
-      var tmp_3 = _get_expressionRule__1177618135();
-      var tmp_4 = _get_commaRule__3746010368();
-      argumentsRule = binaryOperatorRule_0(tmp_3, tmp_4, argumentsRule$lambda());
-      var tmp_5 = [_get_primaryExpressionRule__3731994683(), zeroOrMoreRule_0(andRule_0([_get_leftParenRule__1902601682(), optionalRule(_get_argumentsRule__4127323551()), _get_rightParenRule__1732469473()]))];
-      callRule = andRule(tmp_5, callRule$lambda());
+      var tmp$ret$0;
+      $l$block: {
+        var tmp0_listRule_0 = _get_identifierRule__1187417958();
+        var tmp = _get_commaRule__3746010368();
+        tmp$ret$0 = binaryOperatorRule_0(tmp0_listRule_0, tmp, argumentsDeclarationRule$lambda());
+        break $l$block;
+      }
+      argumentsDeclarationRule = tmp$ret$0;
+      var tmp_0 = intermediateBlockStatementRule$lambda();
+      intermediateBlockStatementRule = new sam$parser_Rule$0_7(tmp_0);
+      var tmp_1 = [_get_funKeywordRule__4178608453(), _get_identifierRule__1187417958(), _get_leftParenRule__1902601682(), optionalRule(_get_argumentsDeclarationRule__3232159339()), _get_rightParenRule__1732469473(), _get_intermediateBlockStatementRule__496927892()];
+      functionDeclarationRule = andRule(tmp_1, functionDeclarationRule$lambda());
+      var tmp$ret$0_0;
+      $l$block_0: {
+        var tmp0_listRule_0_0 = _get_expressionRule__1177618135();
+        var tmp_2 = _get_commaRule__3746010368();
+        tmp$ret$0_0 = binaryOperatorRule_0(tmp0_listRule_0_0, tmp_2, argumentsRule$lambda());
+        break $l$block_0;
+      }
+      argumentsRule = tmp$ret$0_0;
+      var tmp_3 = [_get_primaryExpressionRule__3731994683(), zeroOrMoreRule_0(andRule_0([_get_leftParenRule__1902601682(), optionalRule(_get_argumentsRule__4127323551()), _get_rightParenRule__1732469473()]))];
+      callRule = andRule(tmp_3, callRule$lambda());
     }
   }
   function _get_intermediateDeclarationRule__3129730516() {
@@ -4502,6 +4694,11 @@
     return expressionStatementRule;
   }
   var expressionStatementRule;
+  function _get_returnStatementRule__3456673846() {
+    init_properties_Statements_kt_1816544118();
+    return returnStatementRule;
+  }
+  var returnStatementRule;
   function _get_blockStatementRule__2317780429() {
     init_properties_Statements_kt_1816544118();
     return blockStatementRule;
@@ -4582,6 +4779,52 @@
       }
       validateGrammar(tmp);
       return new NodeToken(new ExpressionStatement(expressionToken._get_node__804577417_db0vwp_k$()));
+    };
+  }
+  function returnStatementRule$lambda() {
+    return function (tokens) {
+      var tmp0_container = tokens;
+      var tmp$ret$0;
+      $l$block: {
+        tmp$ret$0 = tmp0_container.get_fkrdnv_k$(1);
+        break $l$block;
+      }
+      var optionalExpressionToken = tmp$ret$0;
+      Unit_getInstance();
+      validateGrammar(optionalExpressionToken instanceof OptionalToken);
+      var tmp1_safe_receiver = optionalExpressionToken._get_token__3639048440_auim88_k$();
+      var tmp;
+      if (tmp1_safe_receiver == null) {
+        tmp = null;
+      } else {
+        var tmp$ret$2;
+        $l$block_1: {
+          {
+          }
+          var tmp$ret$1;
+          $l$block_0: {
+            var tmp_0;
+            if (tmp1_safe_receiver instanceof NodeToken) {
+              var tmp_1 = tmp1_safe_receiver._get_node__804577417_db0vwp_k$();
+              tmp_0 = tmp_1 instanceof Expression;
+            } else {
+              {
+                tmp_0 = false;
+              }
+            }
+            validateGrammar(tmp_0);
+            tmp$ret$1 = tmp1_safe_receiver._get_node__804577417_db0vwp_k$();
+            break $l$block_0;
+          }
+          tmp$ret$2 = tmp$ret$1;
+          break $l$block_1;
+        }
+        tmp = tmp$ret$2;
+      }
+      var tmp2_elvis_lhs = tmp;
+      var returnResult = tmp2_elvis_lhs == null ? NilValue_getInstance() : tmp2_elvis_lhs;
+      Unit_getInstance();
+      return new NodeToken(new ReturnStatement(returnResult));
     };
   }
   function blockStatementRule$lambda() {
@@ -4746,15 +4989,17 @@
       printStatementRule = andRule(tmp, printStatementRule$lambda());
       var tmp_0 = [_get_expressionRule__1177618135(), _get_semicolonRule__1298692900()];
       expressionStatementRule = andRule(tmp_0, expressionStatementRule$lambda());
-      var tmp_1 = [_get_leftBraceRule__2396161609(), zeroOrMoreRule_0(_get_intermediateDeclarationRule__3129730516()), _get_rightBraceRule__2226029400()];
-      blockStatementRule = andRule(tmp_1, blockStatementRule$lambda());
-      var tmp_2 = intermediateStatementRule$lambda();
-      intermediateStatementRule = new sam$parser_Rule$0_9(tmp_2);
-      var tmp_3 = [_get_ifKeywordRule__1976554153(), _get_leftParenRule__1902601682(), _get_expressionRule__1177618135(), _get_rightParenRule__1732469473(), _get_intermediateStatementRule__996543999(), optionalRule(andRule_0([_get_elseKeywordRule__2884251653(), _get_intermediateStatementRule__996543999()]))];
-      ifStatementRule = andRule(tmp_3, ifStatementRule$lambda());
-      var tmp_4 = [_get_whileKeywordRule__3311568055(), _get_leftParenRule__1902601682(), _get_expressionRule__1177618135(), _get_rightParenRule__1732469473(), _get_intermediateStatementRule__996543999()];
-      whileStatementRule = andRule(tmp_4, whileStatementRule$lambda());
-      statementRule = orRule([_get_expressionStatementRule__891749918(), _get_printStatementRule__1524841453(), _get_blockStatementRule__2317780429(), _get_ifStatementRule__2418783971(), _get_whileStatementRule__1171922289(), _get_forStatementRule__1677567049()]);
+      var tmp_1 = [_get_returnKeywordRule__4140760252(), optionalRule(_get_expressionRule__1177618135()), _get_semicolonRule__1298692900()];
+      returnStatementRule = andRule(tmp_1, returnStatementRule$lambda());
+      var tmp_2 = [_get_leftBraceRule__2396161609(), zeroOrMoreRule_0(_get_intermediateDeclarationRule__3129730516()), _get_rightBraceRule__2226029400()];
+      blockStatementRule = andRule(tmp_2, blockStatementRule$lambda());
+      var tmp_3 = intermediateStatementRule$lambda();
+      intermediateStatementRule = new sam$parser_Rule$0_9(tmp_3);
+      var tmp_4 = [_get_ifKeywordRule__1976554153(), _get_leftParenRule__1902601682(), _get_expressionRule__1177618135(), _get_rightParenRule__1732469473(), _get_intermediateStatementRule__996543999(), optionalRule(andRule_0([_get_elseKeywordRule__2884251653(), _get_intermediateStatementRule__996543999()]))];
+      ifStatementRule = andRule(tmp_4, ifStatementRule$lambda());
+      var tmp_5 = [_get_whileKeywordRule__3311568055(), _get_leftParenRule__1902601682(), _get_expressionRule__1177618135(), _get_rightParenRule__1732469473(), _get_intermediateStatementRule__996543999()];
+      whileStatementRule = andRule(tmp_5, whileStatementRule$lambda());
+      statementRule = orRule([_get_expressionStatementRule__891749918(), _get_printStatementRule__1524841453(), _get_blockStatementRule__2317780429(), _get_ifStatementRule__2418783971(), _get_whileStatementRule__1171922289(), _get_forStatementRule__1677567049(), _get_returnStatementRule__3456673846()]);
     }
   }
   function _get_identifierRule__1187417958() {
@@ -4777,6 +5022,11 @@
     return funKeywordRule;
   }
   var funKeywordRule;
+  function _get_returnKeywordRule__4140760252() {
+    init_properties_Terminals_kt_1661659165();
+    return returnKeywordRule;
+  }
+  var returnKeywordRule;
   function _get_ifKeywordRule__1976554153() {
     init_properties_Terminals_kt_1661659165();
     return ifKeywordRule;
@@ -5297,6 +5547,17 @@
     kind: 'class',
     interfaces: [Rule]
   };
+  function sam$parser_Rule$0_44(function_0) {
+    this.function_1 = function_0;
+  }
+  sam$parser_Rule$0_44.prototype.match_mgqn9o_k$ = function (ctx) {
+    return this.function_1(ctx);
+  };
+  sam$parser_Rule$0_44.$metadata$ = {
+    simpleName: 'sam$parser_Rule$0',
+    kind: 'class',
+    interfaces: [Rule]
+  };
   function identifierRule$lambda() {
     return function (ctx) {
       var currentToken_2_2 = ctx.currentToken_o4eznk_k$();
@@ -5367,6 +5628,18 @@
       Unit_getInstance();
       var tmp;
       if (currentToken_2_2 instanceof FunLexerToken) {
+        return new Matched(new SymbolicToken(currentToken_2_2), ctx.move_1zys1_k$());
+      } else {
+      }
+      return Unmatched_getInstance();
+    };
+  }
+  function returnKeywordRule$lambda() {
+    return function (ctx) {
+      var currentToken_2_2 = ctx.currentToken_o4eznk_k$();
+      Unit_getInstance();
+      var tmp;
+      if (currentToken_2_2 instanceof ReturnLexerToken) {
         return new Matched(new SymbolicToken(currentToken_2_2), ctx.move_1zys1_k$());
       } else {
       }
@@ -5822,362 +6095,374 @@
       $l$block_8: {
         var tmp$ret$0_3;
         $l$block_7: {
-          var tmp_3 = ifKeywordRule$lambda();
+          var tmp_3 = returnKeywordRule$lambda();
           tmp$ret$0_3 = new sam$parser_Rule$0_14(tmp_3);
           break $l$block_7;
         }
         tmp$ret$1_3 = tmp$ret$0_3;
         break $l$block_8;
       }
-      ifKeywordRule = tmp$ret$1_3;
+      returnKeywordRule = tmp$ret$1_3;
       var tmp$ret$1_4;
       $l$block_10: {
         var tmp$ret$0_4;
         $l$block_9: {
-          var tmp_4 = elseKeywordRule$lambda();
+          var tmp_4 = ifKeywordRule$lambda();
           tmp$ret$0_4 = new sam$parser_Rule$0_15(tmp_4);
           break $l$block_9;
         }
         tmp$ret$1_4 = tmp$ret$0_4;
         break $l$block_10;
       }
-      elseKeywordRule = tmp$ret$1_4;
+      ifKeywordRule = tmp$ret$1_4;
       var tmp$ret$1_5;
       $l$block_12: {
         var tmp$ret$0_5;
         $l$block_11: {
-          var tmp_5 = orKeywordRule$lambda();
+          var tmp_5 = elseKeywordRule$lambda();
           tmp$ret$0_5 = new sam$parser_Rule$0_16(tmp_5);
           break $l$block_11;
         }
         tmp$ret$1_5 = tmp$ret$0_5;
         break $l$block_12;
       }
-      orKeywordRule = tmp$ret$1_5;
+      elseKeywordRule = tmp$ret$1_5;
       var tmp$ret$1_6;
       $l$block_14: {
         var tmp$ret$0_6;
         $l$block_13: {
-          var tmp_6 = andKeywordRule$lambda();
+          var tmp_6 = orKeywordRule$lambda();
           tmp$ret$0_6 = new sam$parser_Rule$0_17(tmp_6);
           break $l$block_13;
         }
         tmp$ret$1_6 = tmp$ret$0_6;
         break $l$block_14;
       }
-      andKeywordRule = tmp$ret$1_6;
+      orKeywordRule = tmp$ret$1_6;
       var tmp$ret$1_7;
       $l$block_16: {
         var tmp$ret$0_7;
         $l$block_15: {
-          var tmp_7 = whileKeywordRule$lambda();
+          var tmp_7 = andKeywordRule$lambda();
           tmp$ret$0_7 = new sam$parser_Rule$0_18(tmp_7);
           break $l$block_15;
         }
         tmp$ret$1_7 = tmp$ret$0_7;
         break $l$block_16;
       }
-      whileKeywordRule = tmp$ret$1_7;
+      andKeywordRule = tmp$ret$1_7;
       var tmp$ret$1_8;
       $l$block_18: {
         var tmp$ret$0_8;
         $l$block_17: {
-          var tmp_8 = forKeywordRule$lambda();
+          var tmp_8 = whileKeywordRule$lambda();
           tmp$ret$0_8 = new sam$parser_Rule$0_19(tmp_8);
           break $l$block_17;
         }
         tmp$ret$1_8 = tmp$ret$0_8;
         break $l$block_18;
       }
-      forKeywordRule = tmp$ret$1_8;
+      whileKeywordRule = tmp$ret$1_8;
       var tmp$ret$1_9;
       $l$block_20: {
         var tmp$ret$0_9;
         $l$block_19: {
-          var tmp_9 = printKeywordRule$lambda();
+          var tmp_9 = forKeywordRule$lambda();
           tmp$ret$0_9 = new sam$parser_Rule$0_20(tmp_9);
           break $l$block_19;
         }
         tmp$ret$1_9 = tmp$ret$0_9;
         break $l$block_20;
       }
-      printKeywordRule = tmp$ret$1_9;
+      forKeywordRule = tmp$ret$1_9;
       var tmp$ret$1_10;
       $l$block_22: {
         var tmp$ret$0_10;
         $l$block_21: {
-          var tmp_10 = varKeywordRule$lambda();
+          var tmp_10 = printKeywordRule$lambda();
           tmp$ret$0_10 = new sam$parser_Rule$0_21(tmp_10);
           break $l$block_21;
         }
         tmp$ret$1_10 = tmp$ret$0_10;
         break $l$block_22;
       }
-      varKeywordRule = tmp$ret$1_10;
+      printKeywordRule = tmp$ret$1_10;
       var tmp$ret$1_11;
       $l$block_24: {
         var tmp$ret$0_11;
         $l$block_23: {
-          var tmp_11 = trueRule$lambda();
+          var tmp_11 = varKeywordRule$lambda();
           tmp$ret$0_11 = new sam$parser_Rule$0_22(tmp_11);
           break $l$block_23;
         }
         tmp$ret$1_11 = tmp$ret$0_11;
         break $l$block_24;
       }
-      trueRule = tmp$ret$1_11;
+      varKeywordRule = tmp$ret$1_11;
       var tmp$ret$1_12;
       $l$block_26: {
         var tmp$ret$0_12;
         $l$block_25: {
-          var tmp_12 = falseRule$lambda();
+          var tmp_12 = trueRule$lambda();
           tmp$ret$0_12 = new sam$parser_Rule$0_23(tmp_12);
           break $l$block_25;
         }
         tmp$ret$1_12 = tmp$ret$0_12;
         break $l$block_26;
       }
-      falseRule = tmp$ret$1_12;
+      trueRule = tmp$ret$1_12;
       var tmp$ret$1_13;
       $l$block_28: {
         var tmp$ret$0_13;
         $l$block_27: {
-          var tmp_13 = nilRule$lambda();
+          var tmp_13 = falseRule$lambda();
           tmp$ret$0_13 = new sam$parser_Rule$0_24(tmp_13);
           break $l$block_27;
         }
         tmp$ret$1_13 = tmp$ret$0_13;
         break $l$block_28;
       }
-      nilRule = tmp$ret$1_13;
+      falseRule = tmp$ret$1_13;
       var tmp$ret$1_14;
       $l$block_30: {
         var tmp$ret$0_14;
         $l$block_29: {
-          var tmp_14 = commaRule$lambda();
+          var tmp_14 = nilRule$lambda();
           tmp$ret$0_14 = new sam$parser_Rule$0_25(tmp_14);
           break $l$block_29;
         }
         tmp$ret$1_14 = tmp$ret$0_14;
         break $l$block_30;
       }
-      commaRule = tmp$ret$1_14;
+      nilRule = tmp$ret$1_14;
       var tmp$ret$1_15;
       $l$block_32: {
         var tmp$ret$0_15;
         $l$block_31: {
-          var tmp_15 = semicolonRule$lambda();
+          var tmp_15 = commaRule$lambda();
           tmp$ret$0_15 = new sam$parser_Rule$0_26(tmp_15);
           break $l$block_31;
         }
         tmp$ret$1_15 = tmp$ret$0_15;
         break $l$block_32;
       }
-      semicolonRule = tmp$ret$1_15;
+      commaRule = tmp$ret$1_15;
       var tmp$ret$1_16;
       $l$block_34: {
         var tmp$ret$0_16;
         $l$block_33: {
-          var tmp_16 = leftBraceRule$lambda();
+          var tmp_16 = semicolonRule$lambda();
           tmp$ret$0_16 = new sam$parser_Rule$0_27(tmp_16);
           break $l$block_33;
         }
         tmp$ret$1_16 = tmp$ret$0_16;
         break $l$block_34;
       }
-      leftBraceRule = tmp$ret$1_16;
+      semicolonRule = tmp$ret$1_16;
       var tmp$ret$1_17;
       $l$block_36: {
         var tmp$ret$0_17;
         $l$block_35: {
-          var tmp_17 = rightBraceRule$lambda();
+          var tmp_17 = leftBraceRule$lambda();
           tmp$ret$0_17 = new sam$parser_Rule$0_28(tmp_17);
           break $l$block_35;
         }
         tmp$ret$1_17 = tmp$ret$0_17;
         break $l$block_36;
       }
-      rightBraceRule = tmp$ret$1_17;
+      leftBraceRule = tmp$ret$1_17;
       var tmp$ret$1_18;
       $l$block_38: {
         var tmp$ret$0_18;
         $l$block_37: {
-          var tmp_18 = leftParenRule$lambda();
+          var tmp_18 = rightBraceRule$lambda();
           tmp$ret$0_18 = new sam$parser_Rule$0_29(tmp_18);
           break $l$block_37;
         }
         tmp$ret$1_18 = tmp$ret$0_18;
         break $l$block_38;
       }
-      leftParenRule = tmp$ret$1_18;
+      rightBraceRule = tmp$ret$1_18;
       var tmp$ret$1_19;
       $l$block_40: {
         var tmp$ret$0_19;
         $l$block_39: {
-          var tmp_19 = rightParenRule$lambda();
+          var tmp_19 = leftParenRule$lambda();
           tmp$ret$0_19 = new sam$parser_Rule$0_30(tmp_19);
           break $l$block_39;
         }
         tmp$ret$1_19 = tmp$ret$0_19;
         break $l$block_40;
       }
-      rightParenRule = tmp$ret$1_19;
+      leftParenRule = tmp$ret$1_19;
       var tmp$ret$1_20;
       $l$block_42: {
         var tmp$ret$0_20;
         $l$block_41: {
-          var tmp_20 = bangRule$lambda();
+          var tmp_20 = rightParenRule$lambda();
           tmp$ret$0_20 = new sam$parser_Rule$0_31(tmp_20);
           break $l$block_41;
         }
         tmp$ret$1_20 = tmp$ret$0_20;
         break $l$block_42;
       }
-      bangRule = tmp$ret$1_20;
+      rightParenRule = tmp$ret$1_20;
       var tmp$ret$1_21;
       $l$block_44: {
         var tmp$ret$0_21;
         $l$block_43: {
-          var tmp_21 = plusRule$lambda();
+          var tmp_21 = bangRule$lambda();
           tmp$ret$0_21 = new sam$parser_Rule$0_32(tmp_21);
           break $l$block_43;
         }
         tmp$ret$1_21 = tmp$ret$0_21;
         break $l$block_44;
       }
-      plusRule = tmp$ret$1_21;
+      bangRule = tmp$ret$1_21;
       var tmp$ret$1_22;
       $l$block_46: {
         var tmp$ret$0_22;
         $l$block_45: {
-          var tmp_22 = minusRule$lambda();
+          var tmp_22 = plusRule$lambda();
           tmp$ret$0_22 = new sam$parser_Rule$0_33(tmp_22);
           break $l$block_45;
         }
         tmp$ret$1_22 = tmp$ret$0_22;
         break $l$block_46;
       }
-      minusRule = tmp$ret$1_22;
+      plusRule = tmp$ret$1_22;
       var tmp$ret$1_23;
       $l$block_48: {
         var tmp$ret$0_23;
         $l$block_47: {
-          var tmp_23 = starRule$lambda();
+          var tmp_23 = minusRule$lambda();
           tmp$ret$0_23 = new sam$parser_Rule$0_34(tmp_23);
           break $l$block_47;
         }
         tmp$ret$1_23 = tmp$ret$0_23;
         break $l$block_48;
       }
-      starRule = tmp$ret$1_23;
+      minusRule = tmp$ret$1_23;
       var tmp$ret$1_24;
       $l$block_50: {
         var tmp$ret$0_24;
         $l$block_49: {
-          var tmp_24 = slashRule$lambda();
+          var tmp_24 = starRule$lambda();
           tmp$ret$0_24 = new sam$parser_Rule$0_35(tmp_24);
           break $l$block_49;
         }
         tmp$ret$1_24 = tmp$ret$0_24;
         break $l$block_50;
       }
-      slashRule = tmp$ret$1_24;
+      starRule = tmp$ret$1_24;
       var tmp$ret$1_25;
       $l$block_52: {
         var tmp$ret$0_25;
         $l$block_51: {
-          var tmp_25 = greaterRule$lambda();
+          var tmp_25 = slashRule$lambda();
           tmp$ret$0_25 = new sam$parser_Rule$0_36(tmp_25);
           break $l$block_51;
         }
         tmp$ret$1_25 = tmp$ret$0_25;
         break $l$block_52;
       }
-      greaterRule = tmp$ret$1_25;
+      slashRule = tmp$ret$1_25;
       var tmp$ret$1_26;
       $l$block_54: {
         var tmp$ret$0_26;
         $l$block_53: {
-          var tmp_26 = greaterEqualRule$lambda();
+          var tmp_26 = greaterRule$lambda();
           tmp$ret$0_26 = new sam$parser_Rule$0_37(tmp_26);
           break $l$block_53;
         }
         tmp$ret$1_26 = tmp$ret$0_26;
         break $l$block_54;
       }
-      greaterEqualRule = tmp$ret$1_26;
+      greaterRule = tmp$ret$1_26;
       var tmp$ret$1_27;
       $l$block_56: {
         var tmp$ret$0_27;
         $l$block_55: {
-          var tmp_27 = lessRule$lambda();
+          var tmp_27 = greaterEqualRule$lambda();
           tmp$ret$0_27 = new sam$parser_Rule$0_38(tmp_27);
           break $l$block_55;
         }
         tmp$ret$1_27 = tmp$ret$0_27;
         break $l$block_56;
       }
-      lessRule = tmp$ret$1_27;
+      greaterEqualRule = tmp$ret$1_27;
       var tmp$ret$1_28;
       $l$block_58: {
         var tmp$ret$0_28;
         $l$block_57: {
-          var tmp_28 = lessEqualRule$lambda();
+          var tmp_28 = lessRule$lambda();
           tmp$ret$0_28 = new sam$parser_Rule$0_39(tmp_28);
           break $l$block_57;
         }
         tmp$ret$1_28 = tmp$ret$0_28;
         break $l$block_58;
       }
-      lessEqualRule = tmp$ret$1_28;
+      lessRule = tmp$ret$1_28;
       var tmp$ret$1_29;
       $l$block_60: {
         var tmp$ret$0_29;
         $l$block_59: {
-          var tmp_29 = equalRule$lambda();
+          var tmp_29 = lessEqualRule$lambda();
           tmp$ret$0_29 = new sam$parser_Rule$0_40(tmp_29);
           break $l$block_59;
         }
         tmp$ret$1_29 = tmp$ret$0_29;
         break $l$block_60;
       }
-      equalRule = tmp$ret$1_29;
+      lessEqualRule = tmp$ret$1_29;
       var tmp$ret$1_30;
       $l$block_62: {
         var tmp$ret$0_30;
         $l$block_61: {
-          var tmp_30 = bangEqualRule$lambda();
+          var tmp_30 = equalRule$lambda();
           tmp$ret$0_30 = new sam$parser_Rule$0_41(tmp_30);
           break $l$block_61;
         }
         tmp$ret$1_30 = tmp$ret$0_30;
         break $l$block_62;
       }
-      bangEqualRule = tmp$ret$1_30;
+      equalRule = tmp$ret$1_30;
       var tmp$ret$1_31;
       $l$block_64: {
         var tmp$ret$0_31;
         $l$block_63: {
-          var tmp_31 = equalEqualRule$lambda();
+          var tmp_31 = bangEqualRule$lambda();
           tmp$ret$0_31 = new sam$parser_Rule$0_42(tmp_31);
           break $l$block_63;
         }
         tmp$ret$1_31 = tmp$ret$0_31;
         break $l$block_64;
       }
-      equalEqualRule = tmp$ret$1_31;
+      bangEqualRule = tmp$ret$1_31;
       var tmp$ret$1_32;
       $l$block_66: {
         var tmp$ret$0_32;
         $l$block_65: {
-          var tmp_32 = eofRule$lambda();
+          var tmp_32 = equalEqualRule$lambda();
           tmp$ret$0_32 = new sam$parser_Rule$0_43(tmp_32);
           break $l$block_65;
         }
         tmp$ret$1_32 = tmp$ret$0_32;
         break $l$block_66;
       }
-      eofRule = tmp$ret$1_32;
+      equalEqualRule = tmp$ret$1_32;
+      var tmp$ret$1_33;
+      $l$block_68: {
+        var tmp$ret$0_33;
+        $l$block_67: {
+          var tmp_33 = eofRule$lambda();
+          tmp$ret$0_33 = new sam$parser_Rule$0_44(tmp_33);
+          break $l$block_67;
+        }
+        tmp$ret$1_33 = tmp$ret$0_33;
+        break $l$block_68;
+      }
+      eofRule = tmp$ret$1_33;
     }
   }
   function _get_varDeclarationRule__910348284() {
