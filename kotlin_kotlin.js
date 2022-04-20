@@ -1345,14 +1345,14 @@
         return _this__1828080292;
     }
   }
-  function _get_indices__2241594442(_this__1828080292) {
-    return numberRangeToNumber(0, _this__1828080292._get_size__809037418_ddoh9m_k$() - 1 | 0);
-  }
   function arrayListOf(elements) {
     return elements.length === 0 ? ArrayList_init_$Create$() : ArrayList_init_$Create$_1(new ArrayAsCollection(elements, true));
   }
   function throwIndexOverflow() {
     throw ArithmeticException_init_$Create$('Index overflow has happened.');
+  }
+  function _get_indices__2241594442(_this__1828080292) {
+    return numberRangeToNumber(0, _this__1828080292._get_size__809037418_ddoh9m_k$() - 1 | 0);
   }
   function ArrayAsCollection(values, isVarargs) {
     this.values_1 = values;
@@ -1894,9 +1894,6 @@
   function emptySet() {
     return EmptySet_getInstance();
   }
-  function hashSetOf(elements) {
-    return toCollection(elements, HashSet_init_$Create$(mapCapacity(elements.length)));
-  }
   function optimizeReadOnlySet(_this__1828080292) {
     var tmp0_subject = _this__1828080292._get_size__809037418_ddoh9m_k$();
     switch (tmp0_subject) {
@@ -1907,6 +1904,9 @@
       default:
         return _this__1828080292;
     }
+  }
+  function hashSetOf(elements) {
+    return toCollection(elements, HashSet_init_$Create$(mapCapacity(elements.length)));
   }
   function checkWindowSizeStep(size, step) {
     {
@@ -3244,41 +3244,6 @@
     kind: 'class',
     interfaces: []
   };
-  function Triple(first, second, third) {
-    this.first_1 = first;
-    this.second_1 = second;
-    this.third_1 = third;
-  }
-  Triple.prototype.toString = function () {
-    return '(' + this.first_1 + ', ' + this.second_1 + ', ' + this.third_1 + ')';
-  };
-  Triple.prototype.hashCode = function () {
-    var result = this.first_1 == null ? 0 : hashCode(this.first_1);
-    result = imul(result, 31) + (this.second_1 == null ? 0 : hashCode(this.second_1)) | 0;
-    result = imul(result, 31) + (this.third_1 == null ? 0 : hashCode(this.third_1)) | 0;
-    return result;
-  };
-  Triple.prototype.equals = function (other) {
-    if (this === other)
-      return true;
-    if (!(other instanceof Triple))
-      return false;
-    else {
-    }
-    var tmp0_other_with_cast = other instanceof Triple ? other : THROW_CCE();
-    if (!equals_0(this.first_1, tmp0_other_with_cast.first_1))
-      return false;
-    if (!equals_0(this.second_1, tmp0_other_with_cast.second_1))
-      return false;
-    if (!equals_0(this.third_1, tmp0_other_with_cast.third_1))
-      return false;
-    return true;
-  };
-  Triple.$metadata$ = {
-    simpleName: 'Triple',
-    kind: 'class',
-    interfaces: [Serializable]
-  };
   function Pair(first, second) {
     this.first_1 = first;
     this.second_1 = second;
@@ -3325,6 +3290,41 @@
   function to(_this__1828080292, that) {
     return new Pair(_this__1828080292, that);
   }
+  function Triple(first, second, third) {
+    this.first_1 = first;
+    this.second_1 = second;
+    this.third_1 = third;
+  }
+  Triple.prototype.toString = function () {
+    return '(' + this.first_1 + ', ' + this.second_1 + ', ' + this.third_1 + ')';
+  };
+  Triple.prototype.hashCode = function () {
+    var result = this.first_1 == null ? 0 : hashCode(this.first_1);
+    result = imul(result, 31) + (this.second_1 == null ? 0 : hashCode(this.second_1)) | 0;
+    result = imul(result, 31) + (this.third_1 == null ? 0 : hashCode(this.third_1)) | 0;
+    return result;
+  };
+  Triple.prototype.equals = function (other) {
+    if (this === other)
+      return true;
+    if (!(other instanceof Triple))
+      return false;
+    else {
+    }
+    var tmp0_other_with_cast = other instanceof Triple ? other : THROW_CCE();
+    if (!equals_0(this.first_1, tmp0_other_with_cast.first_1))
+      return false;
+    if (!equals_0(this.second_1, tmp0_other_with_cast.second_1))
+      return false;
+    if (!equals_0(this.third_1, tmp0_other_with_cast.third_1))
+      return false;
+    return true;
+  };
+  Triple.$metadata$ = {
+    simpleName: 'Triple',
+    kind: 'class',
+    interfaces: [Serializable]
+  };
   function _UShort___init__impl__3115094534(data) {
     return data;
   }
@@ -3637,24 +3637,6 @@
   function setOf_0(element) {
     return hashSetOf([element]);
   }
-  function copyToArrayImpl(collection) {
-    var tmp$ret$0;
-    $l$block: {
-      tmp$ret$0 = [];
-      break $l$block;
-    }
-    var array = tmp$ret$0;
-    var iterator = collection.iterator_jk1svi_k$();
-    while (iterator.hasNext_bitz1p_k$()) {
-      var tmp$ret$1;
-      $l$block_0: {
-        tmp$ret$1 = array;
-        break $l$block_0;
-      }
-      tmp$ret$1.push(iterator.next_20eer_k$());
-    }
-    return array;
-  }
   function copyToArray(collection) {
     var tmp;
     var tmp$ret$0;
@@ -3692,6 +3674,24 @@
       }
     }
     return tmp;
+  }
+  function copyToArrayImpl(collection) {
+    var tmp$ret$0;
+    $l$block: {
+      tmp$ret$0 = [];
+      break $l$block;
+    }
+    var array = tmp$ret$0;
+    var iterator = collection.iterator_jk1svi_k$();
+    while (iterator.hasNext_bitz1p_k$()) {
+      var tmp$ret$1;
+      $l$block_0: {
+        tmp$ret$1 = array;
+        break $l$block_0;
+      }
+      tmp$ret$1.push(iterator.next_20eer_k$());
+    }
+    return array;
   }
   function AbstractMutableCollection() {
     AbstractCollection.call(this);
@@ -6204,6 +6204,13 @@
     kind: 'interface',
     interfaces: []
   };
+  function List() {
+  }
+  List.$metadata$ = {
+    simpleName: 'List',
+    kind: 'interface',
+    interfaces: [Collection]
+  };
   function Entry() {
   }
   Entry.$metadata$ = {
@@ -6238,13 +6245,6 @@
     simpleName: 'MutableMap',
     kind: 'interface',
     interfaces: [Map]
-  };
-  function List() {
-  }
-  List.$metadata$ = {
-    simpleName: 'List',
-    kind: 'interface',
-    interfaces: [Collection]
   };
   function MutableList() {
   }

@@ -21,23 +21,27 @@
   var ensureNotNull = kotlin_kotlin.$crossModule$.ensureNotNull;
   var Exception = kotlin_kotlin.$crossModule$.Exception;
   var charSequenceLength = kotlin_kotlin.$crossModule$.charSequenceLength;
+  var hashCode = kotlin_kotlin.$crossModule$.hashCode;
+  var equals = kotlin_kotlin.$crossModule$.equals;
+  var getNumberHashCode = kotlin_kotlin.$crossModule$.getNumberHashCode;
+  var getStringHashCode = kotlin_kotlin.$crossModule$.getStringHashCode;
+  var Enum = kotlin_kotlin.$crossModule$.Enum;
+  var getKClass = kotlin_kotlin.$crossModule$.getKClass;
+  var to = kotlin_kotlin.$crossModule$.to;
+  var mapOf = kotlin_kotlin.$crossModule$.mapOf;
   var Exception_init_$Init$ = kotlin_kotlin.$crossModule$.Exception_init_$Init$;
   var captureStack = kotlin_kotlin.$crossModule$.captureStack;
   var setOf = kotlin_kotlin.$crossModule$.setOf;
   var getKClassFromExpression = kotlin_kotlin.$crossModule$.getKClassFromExpression;
   var Triple = kotlin_kotlin.$crossModule$.Triple;
-  var getKClass = kotlin_kotlin.$crossModule$.getKClass;
-  var to = kotlin_kotlin.$crossModule$.to;
-  var mapOf = kotlin_kotlin.$crossModule$.mapOf;
   var LinkedHashMap_init_$Create$ = kotlin_kotlin.$crossModule$.LinkedHashMap_init_$Create$;
   var noWhenBranchMatchedException = kotlin_kotlin.$crossModule$.noWhenBranchMatchedException;
   var collectionSizeOrDefault = kotlin_kotlin.$crossModule$.collectionSizeOrDefault;
   var ArrayList_init_$Create$ = kotlin_kotlin.$crossModule$.ArrayList_init_$Create$;
   var zip = kotlin_kotlin.$crossModule$.zip;
-  var hashCode = kotlin_kotlin.$crossModule$.hashCode;
-  var equals = kotlin_kotlin.$crossModule$.equals;
   var RuntimeException_init_$Create$ = kotlin_kotlin.$crossModule$.RuntimeException_init_$Create$;
   var _get_lastIndex__339712501 = kotlin_kotlin.$crossModule$._get_lastIndex__339712501;
+  var listOf = kotlin_kotlin.$crossModule$.listOf;
   var Pair = kotlin_kotlin.$crossModule$.Pair;
   var ArrayList_init_$Create$_0 = kotlin_kotlin.$crossModule$.ArrayList_init_$Create$_1;
   var checkIndexOverflow = kotlin_kotlin.$crossModule$.checkIndexOverflow;
@@ -45,17 +49,13 @@
   var last = kotlin_kotlin.$crossModule$.last;
   var plus = kotlin_kotlin.$crossModule$.plus;
   var drop = kotlin_kotlin.$crossModule$.drop_1;
-  var getStringHashCode = kotlin_kotlin.$crossModule$.getStringHashCode;
   var startsWith$default = kotlin_kotlin.$crossModule$.startsWith$default;
   var toDouble = kotlin_kotlin.$crossModule$.toDouble;
   var Regex_init_$Create$ = kotlin_kotlin.$crossModule$.Regex_init_$Create$;
   var joinToString$default = kotlin_kotlin.$crossModule$.joinToString$default;
   var trimMargin$default = kotlin_kotlin.$crossModule$.trimMargin$default;
-  var listOf = kotlin_kotlin.$crossModule$.listOf;
   var toString = kotlin_kotlin.$crossModule$.toString;
   var IllegalArgumentException_init_$Create$ = kotlin_kotlin.$crossModule$.IllegalArgumentException_init_$Create$;
-  var getNumberHashCode = kotlin_kotlin.$crossModule$.getNumberHashCode;
-  var Enum = kotlin_kotlin.$crossModule$.Enum;
   var drop_0 = kotlin_kotlin.$crossModule$.drop;
   var chunked = kotlin_kotlin.$crossModule$.chunked;
   var Collection = kotlin_kotlin.$crossModule$.Collection;
@@ -64,6 +64,58 @@
   //endregion
   'use strict';
   //region block: pre-declaration
+  Declaration.prototype = Object.create(AbstractSyntaxNode.prototype);
+  Declaration.prototype.constructor = Declaration;
+  VarDeclaration.prototype = Object.create(Declaration.prototype);
+  VarDeclaration.prototype.constructor = VarDeclaration;
+  Statement.prototype = Object.create(Declaration.prototype);
+  Statement.prototype.constructor = Statement;
+  ReturnStatement.prototype = Object.create(Statement.prototype);
+  ReturnStatement.prototype.constructor = ReturnStatement;
+  IfStatement.prototype = Object.create(Statement.prototype);
+  IfStatement.prototype.constructor = IfStatement;
+  WhileStatement.prototype = Object.create(Statement.prototype);
+  WhileStatement.prototype.constructor = WhileStatement;
+  ForStatement.prototype = Object.create(Statement.prototype);
+  ForStatement.prototype.constructor = ForStatement;
+  PrintStatement.prototype = Object.create(Statement.prototype);
+  PrintStatement.prototype.constructor = PrintStatement;
+  ExpressionStatement.prototype = Object.create(Statement.prototype);
+  ExpressionStatement.prototype.constructor = ExpressionStatement;
+  BlockStatement.prototype = Object.create(Statement.prototype);
+  BlockStatement.prototype.constructor = BlockStatement;
+  Expression.prototype = Object.create(AbstractSyntaxNode.prototype);
+  Expression.prototype.constructor = Expression;
+  Value.prototype = Object.create(Expression.prototype);
+  Value.prototype.constructor = Value;
+  NilValue.prototype = Object.create(Value.prototype);
+  NilValue.prototype.constructor = NilValue;
+  BooleanValue.prototype = Object.create(Value.prototype);
+  BooleanValue.prototype.constructor = BooleanValue;
+  NumericValue.prototype = Object.create(Value.prototype);
+  NumericValue.prototype.constructor = NumericValue;
+  StringValue.prototype = Object.create(Value.prototype);
+  StringValue.prototype.constructor = StringValue;
+  ObjectValue.prototype = Object.create(Value.prototype);
+  ObjectValue.prototype.constructor = ObjectValue;
+  FunctionValue.prototype = Object.create(Value.prototype);
+  FunctionValue.prototype.constructor = FunctionValue;
+  LoxFunctionValue.prototype = Object.create(FunctionValue.prototype);
+  LoxFunctionValue.prototype.constructor = LoxFunctionValue;
+  NativeFunctionValue.prototype = Object.create(FunctionValue.prototype);
+  NativeFunctionValue.prototype.constructor = NativeFunctionValue;
+  FunctionCallExpression.prototype = Object.create(Expression.prototype);
+  FunctionCallExpression.prototype.constructor = FunctionCallExpression;
+  AssignmentExpression.prototype = Object.create(Expression.prototype);
+  AssignmentExpression.prototype.constructor = AssignmentExpression;
+  UnaryOperatorExpression.prototype = Object.create(Expression.prototype);
+  UnaryOperatorExpression.prototype.constructor = UnaryOperatorExpression;
+  BinaryOperatorExpression.prototype = Object.create(Expression.prototype);
+  BinaryOperatorExpression.prototype.constructor = BinaryOperatorExpression;
+  IdentifierExpression.prototype = Object.create(Expression.prototype);
+  IdentifierExpression.prototype.constructor = IdentifierExpression;
+  OperatorType.prototype = Object.create(Enum.prototype);
+  OperatorType.prototype.constructor = OperatorType;
   EvaluationException.prototype = Object.create(Exception.prototype);
   EvaluationException.prototype.constructor = EvaluationException;
   Nothing.prototype = Object.create(ExecutionResult.prototype);
@@ -164,54 +216,6 @@
   Matched.prototype.constructor = Matched;
   Unmatched.prototype = Object.create(MatchResult.prototype);
   Unmatched.prototype.constructor = Unmatched;
-  Declaration.prototype = Object.create(AbstractSyntaxNode.prototype);
-  Declaration.prototype.constructor = Declaration;
-  VarDeclaration.prototype = Object.create(Declaration.prototype);
-  VarDeclaration.prototype.constructor = VarDeclaration;
-  Statement.prototype = Object.create(Declaration.prototype);
-  Statement.prototype.constructor = Statement;
-  ReturnStatement.prototype = Object.create(Statement.prototype);
-  ReturnStatement.prototype.constructor = ReturnStatement;
-  IfStatement.prototype = Object.create(Statement.prototype);
-  IfStatement.prototype.constructor = IfStatement;
-  WhileStatement.prototype = Object.create(Statement.prototype);
-  WhileStatement.prototype.constructor = WhileStatement;
-  ForStatement.prototype = Object.create(Statement.prototype);
-  ForStatement.prototype.constructor = ForStatement;
-  PrintStatement.prototype = Object.create(Statement.prototype);
-  PrintStatement.prototype.constructor = PrintStatement;
-  ExpressionStatement.prototype = Object.create(Statement.prototype);
-  ExpressionStatement.prototype.constructor = ExpressionStatement;
-  BlockStatement.prototype = Object.create(Statement.prototype);
-  BlockStatement.prototype.constructor = BlockStatement;
-  Expression.prototype = Object.create(AbstractSyntaxNode.prototype);
-  Expression.prototype.constructor = Expression;
-  Value.prototype = Object.create(Expression.prototype);
-  Value.prototype.constructor = Value;
-  NilValue.prototype = Object.create(Value.prototype);
-  NilValue.prototype.constructor = NilValue;
-  BooleanValue.prototype = Object.create(Value.prototype);
-  BooleanValue.prototype.constructor = BooleanValue;
-  NumericValue.prototype = Object.create(Value.prototype);
-  NumericValue.prototype.constructor = NumericValue;
-  StringValue.prototype = Object.create(Value.prototype);
-  StringValue.prototype.constructor = StringValue;
-  ObjectValue.prototype = Object.create(Value.prototype);
-  ObjectValue.prototype.constructor = ObjectValue;
-  FunctionValue.prototype = Object.create(Value.prototype);
-  FunctionValue.prototype.constructor = FunctionValue;
-  FunctionCallExpression.prototype = Object.create(Expression.prototype);
-  FunctionCallExpression.prototype.constructor = FunctionCallExpression;
-  AssignmentExpression.prototype = Object.create(Expression.prototype);
-  AssignmentExpression.prototype.constructor = AssignmentExpression;
-  UnaryOperatorExpression.prototype = Object.create(Expression.prototype);
-  UnaryOperatorExpression.prototype.constructor = UnaryOperatorExpression;
-  BinaryOperatorExpression.prototype = Object.create(Expression.prototype);
-  BinaryOperatorExpression.prototype.constructor = BinaryOperatorExpression;
-  IdentifierExpression.prototype = Object.create(Expression.prototype);
-  IdentifierExpression.prototype.constructor = IdentifierExpression;
-  OperatorType.prototype = Object.create(Enum.prototype);
-  OperatorType.prototype.constructor = OperatorType;
   //endregion
   function Printer() {
   }
@@ -308,7 +312,7 @@
     _get_codeMirror__2572497407().setOption('lineNumbers', true);
     _get_codeMirror__2572497407().setOption('mode', 'text/x-kotlin');
     _get_codeMirror__2572497407().setSize('100%', '100%');
-    _get_codeMirror__2572497407().setValue('fun fib(n) {\n    if (n == 0) return 0;\n    if (n == 1) return 1;\n    return fib(n - 1) + fib(n - 2);\n}\n\nfun print_n_first_fib(n) {\n    for (var i = 0; i < n; i = i + 1) {\n        print(fib(i));\n    }\n}\n\nprint_n_first_fib(10);');
+    _get_codeMirror__2572497407().setValue('fun fib(n) {\n    if (n == 0) return 0;\n    if (n == 1) return 1;\n    return fib(n - 1) + fib(n - 2);\n}\n\nvar before = clock();\nprint fib(20);\nvar after = clock();\nprint after - before;');
   }
   function main$lambda() {
     return function (it) {
@@ -373,6 +377,826 @@
     kind: 'class',
     interfaces: [Printer]
   };
+  function AbstractSyntaxNode() {
+  }
+  AbstractSyntaxNode.$metadata$ = {
+    simpleName: 'AbstractSyntaxNode',
+    kind: 'class',
+    interfaces: []
+  };
+  function Declaration() {
+    AbstractSyntaxNode.call(this);
+  }
+  Declaration.$metadata$ = {
+    simpleName: 'Declaration',
+    kind: 'class',
+    interfaces: []
+  };
+  function VarDeclaration(identifier, value) {
+    Declaration.call(this);
+    this.identifier_1 = identifier;
+    this.value_1 = value;
+  }
+  VarDeclaration.prototype._get_identifier__3776854274_8kgyke_k$ = function () {
+    return this.identifier_1;
+  };
+  VarDeclaration.prototype._get_value__3683422336_a43j40_k$ = function () {
+    return this.value_1;
+  };
+  VarDeclaration.prototype.toString = function () {
+    return 'VarDeclaration(identifier=' + this.identifier_1 + ', value=' + this.value_1 + ')';
+  };
+  VarDeclaration.prototype.hashCode = function () {
+    var result = this.identifier_1.hashCode();
+    result = imul(result, 31) + (this.value_1 == null ? 0 : hashCode(this.value_1)) | 0;
+    return result;
+  };
+  VarDeclaration.prototype.equals = function (other) {
+    if (this === other)
+      return true;
+    if (!(other instanceof VarDeclaration))
+      return false;
+    else {
+    }
+    var tmp0_other_with_cast = other instanceof VarDeclaration ? other : THROW_CCE();
+    if (!this.identifier_1.equals(tmp0_other_with_cast.identifier_1))
+      return false;
+    if (!equals(this.value_1, tmp0_other_with_cast.value_1))
+      return false;
+    return true;
+  };
+  VarDeclaration.$metadata$ = {
+    simpleName: 'VarDeclaration',
+    kind: 'class',
+    interfaces: []
+  };
+  function Statement() {
+    Declaration.call(this);
+  }
+  Statement.$metadata$ = {
+    simpleName: 'Statement',
+    kind: 'class',
+    interfaces: []
+  };
+  function ReturnStatement(expr) {
+    Statement.call(this);
+    this.expr_1 = expr;
+  }
+  ReturnStatement.prototype._get_expr__796545782_d68qnq_k$ = function () {
+    return this.expr_1;
+  };
+  ReturnStatement.prototype.toString = function () {
+    return 'ReturnStatement(expr=' + this.expr_1 + ')';
+  };
+  ReturnStatement.prototype.hashCode = function () {
+    return hashCode(this.expr_1);
+  };
+  ReturnStatement.prototype.equals = function (other) {
+    if (this === other)
+      return true;
+    if (!(other instanceof ReturnStatement))
+      return false;
+    else {
+    }
+    var tmp0_other_with_cast = other instanceof ReturnStatement ? other : THROW_CCE();
+    if (!equals(this.expr_1, tmp0_other_with_cast.expr_1))
+      return false;
+    return true;
+  };
+  ReturnStatement.$metadata$ = {
+    simpleName: 'ReturnStatement',
+    kind: 'class',
+    interfaces: []
+  };
+  function IfStatement(condition, body, elseBody) {
+    Statement.call(this);
+    this.condition_1 = condition;
+    this.body_1 = body;
+    this.elseBody_1 = elseBody;
+  }
+  IfStatement.prototype._get_condition__2056333462_y0ad1y_k$ = function () {
+    return this.condition_1;
+  };
+  IfStatement.prototype._get_body__793495785_d4fd9l_k$ = function () {
+    return this.body_1;
+  };
+  IfStatement.prototype._get_elseBody__502126768_8aybhs_k$ = function () {
+    return this.elseBody_1;
+  };
+  IfStatement.prototype.toString = function () {
+    return 'IfStatement(condition=' + this.condition_1 + ', body=' + this.body_1 + ', elseBody=' + this.elseBody_1 + ')';
+  };
+  IfStatement.prototype.hashCode = function () {
+    var result = hashCode(this.condition_1);
+    result = imul(result, 31) + hashCode(this.body_1) | 0;
+    result = imul(result, 31) + (this.elseBody_1 == null ? 0 : hashCode(this.elseBody_1)) | 0;
+    return result;
+  };
+  IfStatement.prototype.equals = function (other) {
+    if (this === other)
+      return true;
+    if (!(other instanceof IfStatement))
+      return false;
+    else {
+    }
+    var tmp0_other_with_cast = other instanceof IfStatement ? other : THROW_CCE();
+    if (!equals(this.condition_1, tmp0_other_with_cast.condition_1))
+      return false;
+    if (!equals(this.body_1, tmp0_other_with_cast.body_1))
+      return false;
+    if (!equals(this.elseBody_1, tmp0_other_with_cast.elseBody_1))
+      return false;
+    return true;
+  };
+  IfStatement.$metadata$ = {
+    simpleName: 'IfStatement',
+    kind: 'class',
+    interfaces: []
+  };
+  function WhileStatement(condition, body) {
+    Statement.call(this);
+    this.condition_1 = condition;
+    this.body_1 = body;
+  }
+  WhileStatement.prototype._get_condition__2056333462_y0ad1y_k$ = function () {
+    return this.condition_1;
+  };
+  WhileStatement.prototype._get_body__793495785_d4fd9l_k$ = function () {
+    return this.body_1;
+  };
+  WhileStatement.prototype.toString = function () {
+    return 'WhileStatement(condition=' + this.condition_1 + ', body=' + this.body_1 + ')';
+  };
+  WhileStatement.prototype.hashCode = function () {
+    var result = hashCode(this.condition_1);
+    result = imul(result, 31) + hashCode(this.body_1) | 0;
+    return result;
+  };
+  WhileStatement.prototype.equals = function (other) {
+    if (this === other)
+      return true;
+    if (!(other instanceof WhileStatement))
+      return false;
+    else {
+    }
+    var tmp0_other_with_cast = other instanceof WhileStatement ? other : THROW_CCE();
+    if (!equals(this.condition_1, tmp0_other_with_cast.condition_1))
+      return false;
+    if (!equals(this.body_1, tmp0_other_with_cast.body_1))
+      return false;
+    return true;
+  };
+  WhileStatement.$metadata$ = {
+    simpleName: 'WhileStatement',
+    kind: 'class',
+    interfaces: []
+  };
+  function ForStatement_init_$Init$(initializer, condition, increment, body, $this) {
+    ForStatement.call($this, initializer instanceof Declaration ? initializer : null, condition, increment, body);
+    return $this;
+  }
+  function ForStatement_init_$Create$(initializer, condition, increment, body) {
+    return ForStatement_init_$Init$(initializer, condition, increment, body, Object.create(ForStatement.prototype));
+  }
+  function ForStatement_init_$Init$_0(initializer, condition, increment, body, $this) {
+    ForStatement.call($this, initializer instanceof Declaration ? initializer : null, condition, increment, body);
+    return $this;
+  }
+  function ForStatement_init_$Create$_0(initializer, condition, increment, body) {
+    return ForStatement_init_$Init$_0(initializer, condition, increment, body, Object.create(ForStatement.prototype));
+  }
+  function ForStatement(initializer, condition, increment, body) {
+    Statement.call(this);
+    this.initializer_1 = initializer;
+    this.condition_1 = condition;
+    this.increment_1 = increment;
+    this.body_1 = body;
+  }
+  ForStatement.prototype._get_initializer__1254092527_kqnjzj_k$ = function () {
+    return this.initializer_1;
+  };
+  ForStatement.prototype._get_condition__2056333462_y0ad1y_k$ = function () {
+    return this.condition_1;
+  };
+  ForStatement.prototype._get_increment__112710850_1v3s8y_k$ = function () {
+    return this.increment_1;
+  };
+  ForStatement.prototype._get_body__793495785_d4fd9l_k$ = function () {
+    return this.body_1;
+  };
+  ForStatement.prototype.toString = function () {
+    return 'ForStatement(initializer=' + this.initializer_1 + ', condition=' + this.condition_1 + ', increment=' + this.increment_1 + ', body=' + this.body_1 + ')';
+  };
+  ForStatement.prototype.hashCode = function () {
+    var result = this.initializer_1 == null ? 0 : hashCode(this.initializer_1);
+    result = imul(result, 31) + (this.condition_1 == null ? 0 : hashCode(this.condition_1)) | 0;
+    result = imul(result, 31) + (this.increment_1 == null ? 0 : hashCode(this.increment_1)) | 0;
+    result = imul(result, 31) + hashCode(this.body_1) | 0;
+    return result;
+  };
+  ForStatement.prototype.equals = function (other) {
+    if (this === other)
+      return true;
+    if (!(other instanceof ForStatement))
+      return false;
+    else {
+    }
+    var tmp0_other_with_cast = other instanceof ForStatement ? other : THROW_CCE();
+    if (!equals(this.initializer_1, tmp0_other_with_cast.initializer_1))
+      return false;
+    if (!equals(this.condition_1, tmp0_other_with_cast.condition_1))
+      return false;
+    if (!equals(this.increment_1, tmp0_other_with_cast.increment_1))
+      return false;
+    if (!equals(this.body_1, tmp0_other_with_cast.body_1))
+      return false;
+    return true;
+  };
+  ForStatement.$metadata$ = {
+    simpleName: 'ForStatement',
+    kind: 'class',
+    interfaces: []
+  };
+  function PrintStatement(expr) {
+    Statement.call(this);
+    this.expr_1 = expr;
+  }
+  PrintStatement.prototype._get_expr__796545782_d68qnq_k$ = function () {
+    return this.expr_1;
+  };
+  PrintStatement.prototype.toString = function () {
+    return 'PrintStatement(expr=' + this.expr_1 + ')';
+  };
+  PrintStatement.prototype.hashCode = function () {
+    return hashCode(this.expr_1);
+  };
+  PrintStatement.prototype.equals = function (other) {
+    if (this === other)
+      return true;
+    if (!(other instanceof PrintStatement))
+      return false;
+    else {
+    }
+    var tmp0_other_with_cast = other instanceof PrintStatement ? other : THROW_CCE();
+    if (!equals(this.expr_1, tmp0_other_with_cast.expr_1))
+      return false;
+    return true;
+  };
+  PrintStatement.$metadata$ = {
+    simpleName: 'PrintStatement',
+    kind: 'class',
+    interfaces: []
+  };
+  function ExpressionStatement(expr) {
+    Statement.call(this);
+    this.expr_1 = expr;
+  }
+  ExpressionStatement.prototype._get_expr__796545782_d68qnq_k$ = function () {
+    return this.expr_1;
+  };
+  ExpressionStatement.prototype.toString = function () {
+    return 'ExpressionStatement(expr=' + this.expr_1 + ')';
+  };
+  ExpressionStatement.prototype.hashCode = function () {
+    return hashCode(this.expr_1);
+  };
+  ExpressionStatement.prototype.equals = function (other) {
+    if (this === other)
+      return true;
+    if (!(other instanceof ExpressionStatement))
+      return false;
+    else {
+    }
+    var tmp0_other_with_cast = other instanceof ExpressionStatement ? other : THROW_CCE();
+    if (!equals(this.expr_1, tmp0_other_with_cast.expr_1))
+      return false;
+    return true;
+  };
+  ExpressionStatement.$metadata$ = {
+    simpleName: 'ExpressionStatement',
+    kind: 'class',
+    interfaces: []
+  };
+  function BlockStatement(declarations) {
+    Statement.call(this);
+    this.declarations_1 = declarations;
+  }
+  BlockStatement.prototype._get_declarations__260996658_4be2b6_k$ = function () {
+    return this.declarations_1;
+  };
+  BlockStatement.prototype.toString = function () {
+    return 'BlockStatement(declarations=' + this.declarations_1 + ')';
+  };
+  BlockStatement.prototype.hashCode = function () {
+    return hashCode(this.declarations_1);
+  };
+  BlockStatement.prototype.equals = function (other) {
+    if (this === other)
+      return true;
+    if (!(other instanceof BlockStatement))
+      return false;
+    else {
+    }
+    var tmp0_other_with_cast = other instanceof BlockStatement ? other : THROW_CCE();
+    if (!equals(this.declarations_1, tmp0_other_with_cast.declarations_1))
+      return false;
+    return true;
+  };
+  BlockStatement.$metadata$ = {
+    simpleName: 'BlockStatement',
+    kind: 'class',
+    interfaces: []
+  };
+  function _get_operatorMapping__1592820167() {
+    init_properties_Expressions_kt_3704108793();
+    return operatorMapping;
+  }
+  var operatorMapping;
+  function Expression() {
+    AbstractSyntaxNode.call(this);
+  }
+  Expression.$metadata$ = {
+    simpleName: 'Expression',
+    kind: 'class',
+    interfaces: []
+  };
+  function Value() {
+    Expression.call(this);
+  }
+  Value.$metadata$ = {
+    simpleName: 'Value',
+    kind: 'class',
+    interfaces: []
+  };
+  function NilValue() {
+    NilValue_instance = this;
+    Value.call(this);
+  }
+  NilValue.$metadata$ = {
+    simpleName: 'NilValue',
+    kind: 'object',
+    interfaces: []
+  };
+  var NilValue_instance;
+  function NilValue_getInstance() {
+    if (NilValue_instance == null)
+      new NilValue();
+    return NilValue_instance;
+  }
+  function BooleanValue(value) {
+    Value.call(this);
+    this.value_1 = value;
+  }
+  BooleanValue.prototype._get_value__3683422336_a43j40_k$ = function () {
+    return this.value_1;
+  };
+  BooleanValue.prototype.toString = function () {
+    return 'BooleanValue(value=' + this.value_1 + ')';
+  };
+  BooleanValue.prototype.hashCode = function () {
+    return this.value_1 | 0;
+  };
+  BooleanValue.prototype.equals = function (other) {
+    if (this === other)
+      return true;
+    if (!(other instanceof BooleanValue))
+      return false;
+    else {
+    }
+    var tmp0_other_with_cast = other instanceof BooleanValue ? other : THROW_CCE();
+    if (!(this.value_1 === tmp0_other_with_cast.value_1))
+      return false;
+    return true;
+  };
+  BooleanValue.$metadata$ = {
+    simpleName: 'BooleanValue',
+    kind: 'class',
+    interfaces: []
+  };
+  function NumericValue(value) {
+    Value.call(this);
+    this.value_1 = value;
+  }
+  NumericValue.prototype._get_value__3683422336_a43j40_k$ = function () {
+    return this.value_1;
+  };
+  NumericValue.prototype.toString = function () {
+    return 'NumericValue(value=' + this.value_1 + ')';
+  };
+  NumericValue.prototype.hashCode = function () {
+    return getNumberHashCode(this.value_1);
+  };
+  NumericValue.prototype.equals = function (other) {
+    if (this === other)
+      return true;
+    if (!(other instanceof NumericValue))
+      return false;
+    else {
+    }
+    var tmp0_other_with_cast = other instanceof NumericValue ? other : THROW_CCE();
+    if (!equals(this.value_1, tmp0_other_with_cast.value_1))
+      return false;
+    return true;
+  };
+  NumericValue.$metadata$ = {
+    simpleName: 'NumericValue',
+    kind: 'class',
+    interfaces: []
+  };
+  function StringValue(value) {
+    Value.call(this);
+    this.value_1 = value;
+  }
+  StringValue.prototype._get_value__3683422336_a43j40_k$ = function () {
+    return this.value_1;
+  };
+  StringValue.prototype.toString = function () {
+    return 'StringValue(value=' + this.value_1 + ')';
+  };
+  StringValue.prototype.hashCode = function () {
+    return getStringHashCode(this.value_1);
+  };
+  StringValue.prototype.equals = function (other) {
+    if (this === other)
+      return true;
+    if (!(other instanceof StringValue))
+      return false;
+    else {
+    }
+    var tmp0_other_with_cast = other instanceof StringValue ? other : THROW_CCE();
+    if (!(this.value_1 === tmp0_other_with_cast.value_1))
+      return false;
+    return true;
+  };
+  StringValue.$metadata$ = {
+    simpleName: 'StringValue',
+    kind: 'class',
+    interfaces: []
+  };
+  function ObjectValue() {
+  }
+  ObjectValue.$metadata$ = {
+    simpleName: 'ObjectValue',
+    kind: 'object',
+    interfaces: []
+  };
+  function FunctionValue(argNumber) {
+    Value.call(this);
+    this.argNumber_1 = argNumber;
+  }
+  FunctionValue.prototype._get_argNumber__4293816562_onwu_k$ = function () {
+    return this.argNumber_1;
+  };
+  FunctionValue.$metadata$ = {
+    simpleName: 'FunctionValue',
+    kind: 'class',
+    interfaces: []
+  };
+  function LoxFunctionValue(argNames, body) {
+    FunctionValue.call(this, argNames._get_size__809037418_ddoh9m_k$());
+    this.argNames_1 = argNames;
+    this.body_1 = body;
+  }
+  LoxFunctionValue.prototype._get_argNames__2613895033_rsv7nr_k$ = function () {
+    return this.argNames_1;
+  };
+  LoxFunctionValue.prototype._get_body__793495785_d4fd9l_k$ = function () {
+    return this.body_1;
+  };
+  LoxFunctionValue.prototype.toString = function () {
+    return 'LoxFunctionValue(args = ' + this.argNames_1 + ', body = ' + this.body_1 + ')';
+  };
+  LoxFunctionValue.prototype.hashCode = function () {
+    var result = hashCode(this.argNames_1);
+    result = imul(result, 31) + this.body_1.hashCode() | 0;
+    return result;
+  };
+  LoxFunctionValue.prototype.equals = function (other) {
+    if (this === other)
+      return true;
+    if (!(other instanceof LoxFunctionValue))
+      return false;
+    else {
+    }
+    var tmp0_other_with_cast = other instanceof LoxFunctionValue ? other : THROW_CCE();
+    if (!equals(this.argNames_1, tmp0_other_with_cast.argNames_1))
+      return false;
+    if (!this.body_1.equals(tmp0_other_with_cast.body_1))
+      return false;
+    return true;
+  };
+  LoxFunctionValue.$metadata$ = {
+    simpleName: 'LoxFunctionValue',
+    kind: 'class',
+    interfaces: []
+  };
+  function NativeFunctionValue(name, argNumber, call) {
+    FunctionValue.call(this, argNumber);
+    this.name_1 = name;
+    this.call_1 = call;
+  }
+  NativeFunctionValue.prototype._get_name__804168992_das4rk_k$ = function () {
+    return this.name_1;
+  };
+  NativeFunctionValue.prototype._get_call__794009517_d4qdnx_k$ = function () {
+    return this.call_1;
+  };
+  NativeFunctionValue.prototype.toString = function () {
+    return 'NativeFunctionValue(name = ' + this.name_1 + ', argNumber = ' + this._get_argNumber__4293816562_onwu_k$() + ')';
+  };
+  NativeFunctionValue.$metadata$ = {
+    simpleName: 'NativeFunctionValue',
+    kind: 'class',
+    interfaces: []
+  };
+  function FunctionCallExpression(function_0, arguments_0) {
+    Expression.call(this);
+    this.function_1 = function_0;
+    this.arguments_1 = arguments_0;
+  }
+  FunctionCallExpression.prototype._get_function__1341261555_m6jw1f_k$ = function () {
+    return this.function_1;
+  };
+  FunctionCallExpression.prototype._get_arguments__15705019_9cm2j_k$ = function () {
+    return this.arguments_1;
+  };
+  FunctionCallExpression.prototype.toString = function () {
+    return 'FunctionCallExpression(function=' + this.function_1 + ', arguments=' + this.arguments_1 + ')';
+  };
+  FunctionCallExpression.prototype.hashCode = function () {
+    var result = hashCode(this.function_1);
+    result = imul(result, 31) + hashCode(this.arguments_1) | 0;
+    return result;
+  };
+  FunctionCallExpression.prototype.equals = function (other) {
+    if (this === other)
+      return true;
+    if (!(other instanceof FunctionCallExpression))
+      return false;
+    else {
+    }
+    var tmp0_other_with_cast = other instanceof FunctionCallExpression ? other : THROW_CCE();
+    if (!equals(this.function_1, tmp0_other_with_cast.function_1))
+      return false;
+    if (!equals(this.arguments_1, tmp0_other_with_cast.arguments_1))
+      return false;
+    return true;
+  };
+  FunctionCallExpression.$metadata$ = {
+    simpleName: 'FunctionCallExpression',
+    kind: 'class',
+    interfaces: []
+  };
+  function AssignmentExpression(identifier, expr) {
+    Expression.call(this);
+    this.identifier_1 = identifier;
+    this.expr_1 = expr;
+  }
+  AssignmentExpression.prototype._get_identifier__3776854274_8kgyke_k$ = function () {
+    return this.identifier_1;
+  };
+  AssignmentExpression.prototype._get_expr__796545782_d68qnq_k$ = function () {
+    return this.expr_1;
+  };
+  AssignmentExpression.prototype.toString = function () {
+    return 'AssignmentExpression(identifier=' + this.identifier_1 + ', expr=' + this.expr_1 + ')';
+  };
+  AssignmentExpression.prototype.hashCode = function () {
+    var result = this.identifier_1.hashCode();
+    result = imul(result, 31) + hashCode(this.expr_1) | 0;
+    return result;
+  };
+  AssignmentExpression.prototype.equals = function (other) {
+    if (this === other)
+      return true;
+    if (!(other instanceof AssignmentExpression))
+      return false;
+    else {
+    }
+    var tmp0_other_with_cast = other instanceof AssignmentExpression ? other : THROW_CCE();
+    if (!this.identifier_1.equals(tmp0_other_with_cast.identifier_1))
+      return false;
+    if (!equals(this.expr_1, tmp0_other_with_cast.expr_1))
+      return false;
+    return true;
+  };
+  AssignmentExpression.$metadata$ = {
+    simpleName: 'AssignmentExpression',
+    kind: 'class',
+    interfaces: []
+  };
+  function UnaryOperatorExpression(operatorType, expr) {
+    Expression.call(this);
+    this.operatorType_1 = operatorType;
+    this.expr_1 = expr;
+  }
+  UnaryOperatorExpression.prototype._get_operatorType__924874509_fan9ql_k$ = function () {
+    return this.operatorType_1;
+  };
+  UnaryOperatorExpression.prototype._get_expr__796545782_d68qnq_k$ = function () {
+    return this.expr_1;
+  };
+  UnaryOperatorExpression.prototype.toString = function () {
+    return 'UnaryOperatorExpression(operatorType=' + this.operatorType_1 + ', expr=' + this.expr_1 + ')';
+  };
+  UnaryOperatorExpression.prototype.hashCode = function () {
+    var result = this.operatorType_1.hashCode();
+    result = imul(result, 31) + hashCode(this.expr_1) | 0;
+    return result;
+  };
+  UnaryOperatorExpression.prototype.equals = function (other) {
+    if (this === other)
+      return true;
+    if (!(other instanceof UnaryOperatorExpression))
+      return false;
+    else {
+    }
+    var tmp0_other_with_cast = other instanceof UnaryOperatorExpression ? other : THROW_CCE();
+    if (!this.operatorType_1.equals(tmp0_other_with_cast.operatorType_1))
+      return false;
+    if (!equals(this.expr_1, tmp0_other_with_cast.expr_1))
+      return false;
+    return true;
+  };
+  UnaryOperatorExpression.$metadata$ = {
+    simpleName: 'UnaryOperatorExpression',
+    kind: 'class',
+    interfaces: []
+  };
+  function BinaryOperatorExpression(operatorType, lhs, rhs) {
+    Expression.call(this);
+    this.operatorType_1 = operatorType;
+    this.lhs_1 = lhs;
+    this.rhs_1 = rhs;
+  }
+  BinaryOperatorExpression.prototype._get_operatorType__924874509_fan9ql_k$ = function () {
+    return this.operatorType_1;
+  };
+  BinaryOperatorExpression.prototype._get_lhs__857172218_e6c6be_k$ = function () {
+    return this.lhs_1;
+  };
+  BinaryOperatorExpression.prototype._get_rhs__857350964_e6g08k_k$ = function () {
+    return this.rhs_1;
+  };
+  BinaryOperatorExpression.prototype.toString = function () {
+    return 'BinaryOperatorExpression(operatorType=' + this.operatorType_1 + ', lhs=' + this.lhs_1 + ', rhs=' + this.rhs_1 + ')';
+  };
+  BinaryOperatorExpression.prototype.hashCode = function () {
+    var result = this.operatorType_1.hashCode();
+    result = imul(result, 31) + hashCode(this.lhs_1) | 0;
+    result = imul(result, 31) + hashCode(this.rhs_1) | 0;
+    return result;
+  };
+  BinaryOperatorExpression.prototype.equals = function (other) {
+    if (this === other)
+      return true;
+    if (!(other instanceof BinaryOperatorExpression))
+      return false;
+    else {
+    }
+    var tmp0_other_with_cast = other instanceof BinaryOperatorExpression ? other : THROW_CCE();
+    if (!this.operatorType_1.equals(tmp0_other_with_cast.operatorType_1))
+      return false;
+    if (!equals(this.lhs_1, tmp0_other_with_cast.lhs_1))
+      return false;
+    if (!equals(this.rhs_1, tmp0_other_with_cast.rhs_1))
+      return false;
+    return true;
+  };
+  BinaryOperatorExpression.$metadata$ = {
+    simpleName: 'BinaryOperatorExpression',
+    kind: 'class',
+    interfaces: []
+  };
+  function IdentifierExpression(name) {
+    Expression.call(this);
+    this.name_1 = name;
+  }
+  IdentifierExpression.prototype._get_name__804168992_das4rk_k$ = function () {
+    return this.name_1;
+  };
+  IdentifierExpression.prototype.toString = function () {
+    return 'IdentifierExpression(name=' + this.name_1 + ')';
+  };
+  IdentifierExpression.prototype.hashCode = function () {
+    return getStringHashCode(this.name_1);
+  };
+  IdentifierExpression.prototype.equals = function (other) {
+    if (this === other)
+      return true;
+    if (!(other instanceof IdentifierExpression))
+      return false;
+    else {
+    }
+    var tmp0_other_with_cast = other instanceof IdentifierExpression ? other : THROW_CCE();
+    if (!(this.name_1 === tmp0_other_with_cast.name_1))
+      return false;
+    return true;
+  };
+  IdentifierExpression.$metadata$ = {
+    simpleName: 'IdentifierExpression',
+    kind: 'class',
+    interfaces: []
+  };
+  var OperatorType_Bang_instance;
+  var OperatorType_Plus_instance;
+  var OperatorType_Minus_instance;
+  var OperatorType_Star_instance;
+  var OperatorType_Slash_instance;
+  var OperatorType_Greater_instance;
+  var OperatorType_GreaterEqual_instance;
+  var OperatorType_Less_instance;
+  var OperatorType_LessEqual_instance;
+  var OperatorType_BangEqual_instance;
+  var OperatorType_EqualEqual_instance;
+  var OperatorType_Or_instance;
+  var OperatorType_And_instance;
+  var OperatorType_entriesInitialized;
+  function OperatorType_initEntries() {
+    if (OperatorType_entriesInitialized)
+      return Unit_getInstance();
+    OperatorType_entriesInitialized = true;
+    OperatorType_Bang_instance = new OperatorType('Bang', 0);
+    OperatorType_Plus_instance = new OperatorType('Plus', 1);
+    OperatorType_Minus_instance = new OperatorType('Minus', 2);
+    OperatorType_Star_instance = new OperatorType('Star', 3);
+    OperatorType_Slash_instance = new OperatorType('Slash', 4);
+    OperatorType_Greater_instance = new OperatorType('Greater', 5);
+    OperatorType_GreaterEqual_instance = new OperatorType('GreaterEqual', 6);
+    OperatorType_Less_instance = new OperatorType('Less', 7);
+    OperatorType_LessEqual_instance = new OperatorType('LessEqual', 8);
+    OperatorType_BangEqual_instance = new OperatorType('BangEqual', 9);
+    OperatorType_EqualEqual_instance = new OperatorType('EqualEqual', 10);
+    OperatorType_Or_instance = new OperatorType('Or', 11);
+    OperatorType_And_instance = new OperatorType('And', 12);
+  }
+  function OperatorType(name, ordinal) {
+    Enum.call(this, name, ordinal);
+  }
+  OperatorType.$metadata$ = {
+    simpleName: 'OperatorType',
+    kind: 'class',
+    interfaces: []
+  };
+  function OperatorType_Bang_getInstance() {
+    OperatorType_initEntries();
+    return OperatorType_Bang_instance;
+  }
+  function OperatorType_Plus_getInstance() {
+    OperatorType_initEntries();
+    return OperatorType_Plus_instance;
+  }
+  function OperatorType_Minus_getInstance() {
+    OperatorType_initEntries();
+    return OperatorType_Minus_instance;
+  }
+  function OperatorType_Star_getInstance() {
+    OperatorType_initEntries();
+    return OperatorType_Star_instance;
+  }
+  function OperatorType_Slash_getInstance() {
+    OperatorType_initEntries();
+    return OperatorType_Slash_instance;
+  }
+  function OperatorType_Greater_getInstance() {
+    OperatorType_initEntries();
+    return OperatorType_Greater_instance;
+  }
+  function OperatorType_GreaterEqual_getInstance() {
+    OperatorType_initEntries();
+    return OperatorType_GreaterEqual_instance;
+  }
+  function OperatorType_Less_getInstance() {
+    OperatorType_initEntries();
+    return OperatorType_Less_instance;
+  }
+  function OperatorType_LessEqual_getInstance() {
+    OperatorType_initEntries();
+    return OperatorType_LessEqual_instance;
+  }
+  function OperatorType_BangEqual_getInstance() {
+    OperatorType_initEntries();
+    return OperatorType_BangEqual_instance;
+  }
+  function OperatorType_EqualEqual_getInstance() {
+    OperatorType_initEntries();
+    return OperatorType_EqualEqual_instance;
+  }
+  function OperatorType_Or_getInstance() {
+    OperatorType_initEntries();
+    return OperatorType_Or_instance;
+  }
+  function OperatorType_And_getInstance() {
+    OperatorType_initEntries();
+    return OperatorType_And_instance;
+  }
+  var properties_initialized_Expressions_kt_1116722517;
+  function init_properties_Expressions_kt_3704108793() {
+    if (!properties_initialized_Expressions_kt_1116722517) {
+      properties_initialized_Expressions_kt_1116722517 = true;
+      operatorMapping = mapOf([to(getKClass(BangLexerToken), OperatorType_Bang_getInstance()), to(getKClass(PlusLexerToken), OperatorType_Plus_getInstance()), to(getKClass(MinusLexerToken), OperatorType_Minus_getInstance()), to(getKClass(StarLexerToken), OperatorType_Star_getInstance()), to(getKClass(SlashLexerToken), OperatorType_Slash_getInstance()), to(getKClass(GreaterLexerToken), OperatorType_Greater_getInstance()), to(getKClass(GreaterEqualLexerToken), OperatorType_GreaterEqual_getInstance()), to(getKClass(LessLexerToken), OperatorType_Less_getInstance()), to(getKClass(LessEqualLexerToken), OperatorType_LessEqual_getInstance()), to(getKClass(BangEqualLexerToken), OperatorType_BangEqual_getInstance()), to(getKClass(EqualEqualLexerToken), OperatorType_EqualEqual_getInstance()), to(getKClass(OrLexerToken), OperatorType_Or_getInstance()), to(getKClass(AndLexerToken), OperatorType_And_getInstance())]);
+    }
+  }
   function EvaluationException(message) {
     Exception_init_$Init$(message, this);
     captureStack(this, EvaluationException);
@@ -834,14 +1658,14 @@
     }
     tmp.variables_1 = tmp$ret$0;
   }
-  Environment.prototype.createVariable_atcu8f_k$ = function (name, value) {
+  Environment.prototype.createVariable_mm4ah5_k$ = function (name, value) {
     {
       var tmp0_set_0 = this.variables_1;
       tmp0_set_0.put_3mhbri_k$(name, value);
       Unit_getInstance();
     }
   };
-  Environment.prototype.assignVariable_rsruys_k$ = function (name, value) {
+  Environment.prototype.assignVariable_748qfe_k$ = function (name, value) {
     if (this.variables_1.containsKey_wgk31w_k$(name)) {
       {
         var tmp0_set_0 = this.variables_1;
@@ -849,12 +1673,12 @@
         Unit_getInstance();
       }
     } else if (!(this.parentEnvironment_1 == null)) {
-      this.parentEnvironment_1.assignVariable_rsruys_k$(name, value);
+      this.parentEnvironment_1.assignVariable_748qfe_k$(name, value);
     } else {
       throw new EvaluationException('Undefined variable: ' + name._get_name__804168992_das4rk_k$());
     }
   };
-  Environment.prototype.getVariableValue_ptwwas_k$ = function (name) {
+  Environment.prototype.getVariableValue_xsgkkz_k$ = function (name) {
     var tmp$ret$1;
     $l$block_0: {
       var tmp0_getOrElse_0 = this.variables_1;
@@ -864,7 +1688,7 @@
         var tmp$ret$0;
         $l$block: {
           var tmp0_safe_receiver_4 = this.parentEnvironment_1;
-          var tmp1_elvis_lhs_3 = tmp0_safe_receiver_4 == null ? null : tmp0_safe_receiver_4.getVariableValue_ptwwas_k$(name);
+          var tmp1_elvis_lhs_3 = tmp0_safe_receiver_4 == null ? null : tmp0_safe_receiver_4.getVariableValue_xsgkkz_k$(name);
           var tmp_0;
           if (tmp1_elvis_lhs_3 == null) {
             throw new EvaluationException('Undefined variable: ' + name._get_name__804168992_das4rk_k$());
@@ -895,7 +1719,7 @@
       tmp = expr;
     } else {
       if (tmp0_subject instanceof IdentifierExpression) {
-        tmp = evaluationEnvironment.getVariableValue_ptwwas_k$(expr);
+        tmp = evaluationEnvironment.getVariableValue_xsgkkz_k$(expr);
       } else {
         if (tmp0_subject instanceof UnaryOperatorExpression) {
           tmp = evaluateUnaryOperatorExpression(expr, evaluationEnvironment);
@@ -926,58 +1750,37 @@
     validateRuntime(tmp, evaluateFunctionCallExpression$lambda(functionValue));
     var tmp_0 = functionValue._get_argNumber__4293816562_onwu_k$() === expr._get_arguments__15705019_9cm2j_k$()._get_size__809037418_ddoh9m_k$();
     validateRuntime(tmp_0, evaluateFunctionCallExpression$lambda_0(functionValue, expr));
-    var functionEnvironment = new Environment(evaluationEnvironment);
-    {
-      var tmp$ret$3;
-      $l$block_2: {
-        var tmp$ret$2;
-        $l$block_1: {
-          var tmp0_map_0 = expr._get_arguments__15705019_9cm2j_k$();
-          var tmp$ret$1;
-          $l$block_0: {
-            var tmp0_mapTo_0_1 = ArrayList_init_$Create$(collectionSizeOrDefault(tmp0_map_0, 10));
-            var tmp0_iterator_1_2 = tmp0_map_0.iterator_jk1svi_k$();
-            while (tmp0_iterator_1_2.hasNext_bitz1p_k$()) {
-              var item_2_3 = tmp0_iterator_1_2.next_20eer_k$();
-              var tmp$ret$0;
-              $l$block: {
-                tmp$ret$0 = evaluateExpression(item_2_3, evaluationEnvironment);
-                break $l$block;
-              }
-              tmp0_mapTo_0_1.add_1j60pz_k$(tmp$ret$0);
-              Unit_getInstance();
-            }
-            tmp$ret$1 = tmp0_mapTo_0_1;
-            break $l$block_0;
+    var tmp$ret$2;
+    $l$block_1: {
+      var tmp0_map_0 = expr._get_arguments__15705019_9cm2j_k$();
+      var tmp$ret$1;
+      $l$block_0: {
+        var tmp0_mapTo_0_1 = ArrayList_init_$Create$(collectionSizeOrDefault(tmp0_map_0, 10));
+        var tmp0_iterator_1_2 = tmp0_map_0.iterator_jk1svi_k$();
+        while (tmp0_iterator_1_2.hasNext_bitz1p_k$()) {
+          var item_2_3 = tmp0_iterator_1_2.next_20eer_k$();
+          var tmp$ret$0;
+          $l$block: {
+            tmp$ret$0 = evaluateExpression(item_2_3, evaluationEnvironment);
+            break $l$block;
           }
-          tmp$ret$2 = tmp$ret$1;
-          break $l$block_1;
+          tmp0_mapTo_0_1.add_1j60pz_k$(tmp$ret$0);
+          Unit_getInstance();
         }
-        var tmp1_let_0 = tmp$ret$2;
-        var tmp2_let = functionValue._get_argNames__2613895033_rsv7nr_k$();
-        {
-        }
-        tmp$ret$3 = zip(tmp2_let, tmp1_let_0);
-        break $l$block_2;
+        tmp$ret$1 = tmp0_mapTo_0_1;
+        break $l$block_0;
       }
-      var tmp3_forEach_0 = tmp$ret$3;
-      var tmp0_iterator_1 = tmp3_forEach_0.iterator_jk1svi_k$();
-      while (tmp0_iterator_1.hasNext_bitz1p_k$()) {
-        var element_2 = tmp0_iterator_1.next_20eer_k$();
-        {
-          var argName_4 = element_2.component1_7eebsc_k$();
-          var argValue_5 = element_2.component2_7eebsb_k$();
-          functionEnvironment.createVariable_atcu8f_k$(argName_4, argValue_5);
-        }
-      }
+      tmp$ret$2 = tmp$ret$1;
+      break $l$block_1;
     }
-    var result = executeBlockStatement(functionValue._get_body__793495785_d4fd9l_k$(), functionEnvironment);
+    var argumentValues = tmp$ret$2;
+    var tmp0_subject = functionValue;
     var tmp_1;
-    if (result instanceof Nothing) {
-      tmp_1 = NilValue_getInstance();
+    if (tmp0_subject instanceof LoxFunctionValue) {
+      tmp_1 = callLoxFunction(functionValue, argumentValues, evaluationEnvironment);
     } else {
-      if (result instanceof Return) {
-        tmp_1 = result._get_value__3683422336_a43j40_k$();
+      if (tmp0_subject instanceof NativeFunctionValue) {
+        tmp_1 = functionValue._get_call__794009517_d4qdnx_k$()(argumentValues);
       } else {
         {
           noWhenBranchMatchedException();
@@ -986,6 +1789,43 @@
     }
     return tmp_1;
   }
+  function callLoxFunction(functionValue, argumentValues, evaluationEnvironment) {
+    var functionEnvironment = new Environment(evaluationEnvironment);
+    {
+      var tmp$ret$0;
+      $l$block: {
+        var tmp0_let = functionValue._get_argNames__2613895033_rsv7nr_k$();
+        {
+        }
+        tmp$ret$0 = zip(tmp0_let, argumentValues);
+        break $l$block;
+      }
+      var tmp1_forEach_0 = tmp$ret$0;
+      var tmp0_iterator_1 = tmp1_forEach_0.iterator_jk1svi_k$();
+      while (tmp0_iterator_1.hasNext_bitz1p_k$()) {
+        var element_2 = tmp0_iterator_1.next_20eer_k$();
+        {
+          var argName_4 = element_2.component1_7eebsc_k$();
+          var argValue_5 = element_2.component2_7eebsb_k$();
+          functionEnvironment.createVariable_mm4ah5_k$(argName_4, argValue_5);
+        }
+      }
+    }
+    var result = executeBlockStatement(functionValue._get_body__793495785_d4fd9l_k$(), functionEnvironment);
+    var tmp;
+    if (result instanceof Nothing) {
+      tmp = NilValue_getInstance();
+    } else {
+      if (result instanceof Return) {
+        tmp = result._get_value__3683422336_a43j40_k$();
+      } else {
+        {
+          noWhenBranchMatchedException();
+        }
+      }
+    }
+    return tmp;
+  }
   function evaluateAssignmentExpression(expr, evaluationEnvironment) {
     var tmp$ret$0;
     $l$block: {
@@ -993,7 +1833,7 @@
       {
       }
       {
-        evaluationEnvironment.assignVariable_rsruys_k$(expr._get_identifier__3776854274_8kgyke_k$(), tmp0_also_0);
+        evaluationEnvironment.assignVariable_748qfe_k$(expr._get_identifier__3776854274_8kgyke_k$(), tmp0_also_0);
       }
       tmp$ret$0 = tmp0_also_0;
       break $l$block;
@@ -1100,7 +1940,7 @@
     }
     var tmp1_elvis_lhs = tmp;
     var variableValue = tmp1_elvis_lhs == null ? NilValue_getInstance() : tmp1_elvis_lhs;
-    evaluationEnvironment.createVariable_atcu8f_k$(declaration._get_identifier__3776854274_8kgyke_k$(), variableValue);
+    evaluationEnvironment.createVariable_mm4ah5_k$(declaration._get_identifier__3776854274_8kgyke_k$(), variableValue);
     return Nothing_getInstance();
   }
   function executeStatement(statement, evaluationEnvironment) {
@@ -1324,6 +2164,7 @@
     var programToken = matchResult._get_token__3639048440_auim88_k$();
     validateGrammar(programToken instanceof ProgramToken);
     var globalEnvironment = Environment_init_$Create$();
+    importNativeFunctions(globalEnvironment);
     var tmp0_iterator = programToken._get_declarations__260996658_4be2b6_k$().iterator_jk1svi_k$();
     while (tmp0_iterator.hasNext_bitz1p_k$()) {
       var declaration = tmp0_iterator.next_20eer_k$();
@@ -1333,6 +2174,37 @@
     var finalContext = matchResult._get_newCtx__4130049924_2q6r24_k$();
     if (!(finalContext._get_currentIndex__1690914194_ryq5qq_k$() === _get_lastIndex__339712501(initialContext._get_tokens__1141353649_ivj641_k$()))) {
       throw RuntimeException_init_$Create$('Could not interpret program on: ' + finalContext.currentToken_o4eznk_k$()._get_position__3188952002_iahqv2_k$());
+    }
+  }
+  function _get_clockFunction__2341907339() {
+    init_properties_NativeFunctions_kt_676961136();
+    return clockFunction;
+  }
+  var clockFunction;
+  function _get_nativeFunctions__1818492749() {
+    init_properties_NativeFunctions_kt_676961136();
+    return nativeFunctions;
+  }
+  var nativeFunctions;
+  function importNativeFunctions(environment) {
+    init_properties_NativeFunctions_kt_676961136();
+    var tmp0_iterator = _get_nativeFunctions__1818492749().iterator_jk1svi_k$();
+    while (tmp0_iterator.hasNext_bitz1p_k$()) {
+      var function_0 = tmp0_iterator.next_20eer_k$();
+      environment.createVariable_mm4ah5_k$(new IdentifierExpression(function_0._get_name__804168992_das4rk_k$()), function_0);
+    }
+  }
+  function clockFunction$lambda() {
+    return function (it) {
+      return new NumericValue((new Date()).getTime() / 1000.0);
+    };
+  }
+  var properties_initialized_NativeFunctions_kt_171092940;
+  function init_properties_NativeFunctions_kt_676961136() {
+    if (!properties_initialized_NativeFunctions_kt_171092940) {
+      properties_initialized_NativeFunctions_kt_171092940 = true;
+      clockFunction = new NativeFunctionValue('clock', 0, clockFunction$lambda());
+      nativeFunctions = listOf(_get_clockFunction__2341907339());
     }
   }
   function _get_unaryOperatorEvaluators__4039358074() {
@@ -2892,806 +3764,6 @@
     } else {
     }
   }
-  function AbstractSyntaxNode() {
-  }
-  AbstractSyntaxNode.$metadata$ = {
-    simpleName: 'AbstractSyntaxNode',
-    kind: 'class',
-    interfaces: []
-  };
-  function Declaration() {
-    AbstractSyntaxNode.call(this);
-  }
-  Declaration.$metadata$ = {
-    simpleName: 'Declaration',
-    kind: 'class',
-    interfaces: []
-  };
-  function VarDeclaration(identifier, value) {
-    Declaration.call(this);
-    this.identifier_1 = identifier;
-    this.value_1 = value;
-  }
-  VarDeclaration.prototype._get_identifier__3776854274_8kgyke_k$ = function () {
-    return this.identifier_1;
-  };
-  VarDeclaration.prototype._get_value__3683422336_a43j40_k$ = function () {
-    return this.value_1;
-  };
-  VarDeclaration.prototype.toString = function () {
-    return 'VarDeclaration(identifier=' + this.identifier_1 + ', value=' + this.value_1 + ')';
-  };
-  VarDeclaration.prototype.hashCode = function () {
-    var result = this.identifier_1.hashCode();
-    result = imul(result, 31) + (this.value_1 == null ? 0 : hashCode(this.value_1)) | 0;
-    return result;
-  };
-  VarDeclaration.prototype.equals = function (other) {
-    if (this === other)
-      return true;
-    if (!(other instanceof VarDeclaration))
-      return false;
-    else {
-    }
-    var tmp0_other_with_cast = other instanceof VarDeclaration ? other : THROW_CCE();
-    if (!this.identifier_1.equals(tmp0_other_with_cast.identifier_1))
-      return false;
-    if (!equals(this.value_1, tmp0_other_with_cast.value_1))
-      return false;
-    return true;
-  };
-  VarDeclaration.$metadata$ = {
-    simpleName: 'VarDeclaration',
-    kind: 'class',
-    interfaces: []
-  };
-  function Statement() {
-    Declaration.call(this);
-  }
-  Statement.$metadata$ = {
-    simpleName: 'Statement',
-    kind: 'class',
-    interfaces: []
-  };
-  function ReturnStatement(expr) {
-    Statement.call(this);
-    this.expr_1 = expr;
-  }
-  ReturnStatement.prototype._get_expr__796545782_d68qnq_k$ = function () {
-    return this.expr_1;
-  };
-  ReturnStatement.prototype.toString = function () {
-    return 'ReturnStatement(expr=' + this.expr_1 + ')';
-  };
-  ReturnStatement.prototype.hashCode = function () {
-    return hashCode(this.expr_1);
-  };
-  ReturnStatement.prototype.equals = function (other) {
-    if (this === other)
-      return true;
-    if (!(other instanceof ReturnStatement))
-      return false;
-    else {
-    }
-    var tmp0_other_with_cast = other instanceof ReturnStatement ? other : THROW_CCE();
-    if (!equals(this.expr_1, tmp0_other_with_cast.expr_1))
-      return false;
-    return true;
-  };
-  ReturnStatement.$metadata$ = {
-    simpleName: 'ReturnStatement',
-    kind: 'class',
-    interfaces: []
-  };
-  function IfStatement(condition, body, elseBody) {
-    Statement.call(this);
-    this.condition_1 = condition;
-    this.body_1 = body;
-    this.elseBody_1 = elseBody;
-  }
-  IfStatement.prototype._get_condition__2056333462_y0ad1y_k$ = function () {
-    return this.condition_1;
-  };
-  IfStatement.prototype._get_body__793495785_d4fd9l_k$ = function () {
-    return this.body_1;
-  };
-  IfStatement.prototype._get_elseBody__502126768_8aybhs_k$ = function () {
-    return this.elseBody_1;
-  };
-  IfStatement.prototype.toString = function () {
-    return 'IfStatement(condition=' + this.condition_1 + ', body=' + this.body_1 + ', elseBody=' + this.elseBody_1 + ')';
-  };
-  IfStatement.prototype.hashCode = function () {
-    var result = hashCode(this.condition_1);
-    result = imul(result, 31) + hashCode(this.body_1) | 0;
-    result = imul(result, 31) + (this.elseBody_1 == null ? 0 : hashCode(this.elseBody_1)) | 0;
-    return result;
-  };
-  IfStatement.prototype.equals = function (other) {
-    if (this === other)
-      return true;
-    if (!(other instanceof IfStatement))
-      return false;
-    else {
-    }
-    var tmp0_other_with_cast = other instanceof IfStatement ? other : THROW_CCE();
-    if (!equals(this.condition_1, tmp0_other_with_cast.condition_1))
-      return false;
-    if (!equals(this.body_1, tmp0_other_with_cast.body_1))
-      return false;
-    if (!equals(this.elseBody_1, tmp0_other_with_cast.elseBody_1))
-      return false;
-    return true;
-  };
-  IfStatement.$metadata$ = {
-    simpleName: 'IfStatement',
-    kind: 'class',
-    interfaces: []
-  };
-  function WhileStatement(condition, body) {
-    Statement.call(this);
-    this.condition_1 = condition;
-    this.body_1 = body;
-  }
-  WhileStatement.prototype._get_condition__2056333462_y0ad1y_k$ = function () {
-    return this.condition_1;
-  };
-  WhileStatement.prototype._get_body__793495785_d4fd9l_k$ = function () {
-    return this.body_1;
-  };
-  WhileStatement.prototype.toString = function () {
-    return 'WhileStatement(condition=' + this.condition_1 + ', body=' + this.body_1 + ')';
-  };
-  WhileStatement.prototype.hashCode = function () {
-    var result = hashCode(this.condition_1);
-    result = imul(result, 31) + hashCode(this.body_1) | 0;
-    return result;
-  };
-  WhileStatement.prototype.equals = function (other) {
-    if (this === other)
-      return true;
-    if (!(other instanceof WhileStatement))
-      return false;
-    else {
-    }
-    var tmp0_other_with_cast = other instanceof WhileStatement ? other : THROW_CCE();
-    if (!equals(this.condition_1, tmp0_other_with_cast.condition_1))
-      return false;
-    if (!equals(this.body_1, tmp0_other_with_cast.body_1))
-      return false;
-    return true;
-  };
-  WhileStatement.$metadata$ = {
-    simpleName: 'WhileStatement',
-    kind: 'class',
-    interfaces: []
-  };
-  function ForStatement_init_$Init$(initializer, condition, increment, body, $this) {
-    ForStatement.call($this, initializer instanceof Declaration ? initializer : null, condition, increment, body);
-    return $this;
-  }
-  function ForStatement_init_$Create$(initializer, condition, increment, body) {
-    return ForStatement_init_$Init$(initializer, condition, increment, body, Object.create(ForStatement.prototype));
-  }
-  function ForStatement_init_$Init$_0(initializer, condition, increment, body, $this) {
-    ForStatement.call($this, initializer instanceof Declaration ? initializer : null, condition, increment, body);
-    return $this;
-  }
-  function ForStatement_init_$Create$_0(initializer, condition, increment, body) {
-    return ForStatement_init_$Init$_0(initializer, condition, increment, body, Object.create(ForStatement.prototype));
-  }
-  function ForStatement(initializer, condition, increment, body) {
-    Statement.call(this);
-    this.initializer_1 = initializer;
-    this.condition_1 = condition;
-    this.increment_1 = increment;
-    this.body_1 = body;
-  }
-  ForStatement.prototype._get_initializer__1254092527_kqnjzj_k$ = function () {
-    return this.initializer_1;
-  };
-  ForStatement.prototype._get_condition__2056333462_y0ad1y_k$ = function () {
-    return this.condition_1;
-  };
-  ForStatement.prototype._get_increment__112710850_1v3s8y_k$ = function () {
-    return this.increment_1;
-  };
-  ForStatement.prototype._get_body__793495785_d4fd9l_k$ = function () {
-    return this.body_1;
-  };
-  ForStatement.prototype.toString = function () {
-    return 'ForStatement(initializer=' + this.initializer_1 + ', condition=' + this.condition_1 + ', increment=' + this.increment_1 + ', body=' + this.body_1 + ')';
-  };
-  ForStatement.prototype.hashCode = function () {
-    var result = this.initializer_1 == null ? 0 : hashCode(this.initializer_1);
-    result = imul(result, 31) + (this.condition_1 == null ? 0 : hashCode(this.condition_1)) | 0;
-    result = imul(result, 31) + (this.increment_1 == null ? 0 : hashCode(this.increment_1)) | 0;
-    result = imul(result, 31) + hashCode(this.body_1) | 0;
-    return result;
-  };
-  ForStatement.prototype.equals = function (other) {
-    if (this === other)
-      return true;
-    if (!(other instanceof ForStatement))
-      return false;
-    else {
-    }
-    var tmp0_other_with_cast = other instanceof ForStatement ? other : THROW_CCE();
-    if (!equals(this.initializer_1, tmp0_other_with_cast.initializer_1))
-      return false;
-    if (!equals(this.condition_1, tmp0_other_with_cast.condition_1))
-      return false;
-    if (!equals(this.increment_1, tmp0_other_with_cast.increment_1))
-      return false;
-    if (!equals(this.body_1, tmp0_other_with_cast.body_1))
-      return false;
-    return true;
-  };
-  ForStatement.$metadata$ = {
-    simpleName: 'ForStatement',
-    kind: 'class',
-    interfaces: []
-  };
-  function PrintStatement(expr) {
-    Statement.call(this);
-    this.expr_1 = expr;
-  }
-  PrintStatement.prototype._get_expr__796545782_d68qnq_k$ = function () {
-    return this.expr_1;
-  };
-  PrintStatement.prototype.toString = function () {
-    return 'PrintStatement(expr=' + this.expr_1 + ')';
-  };
-  PrintStatement.prototype.hashCode = function () {
-    return hashCode(this.expr_1);
-  };
-  PrintStatement.prototype.equals = function (other) {
-    if (this === other)
-      return true;
-    if (!(other instanceof PrintStatement))
-      return false;
-    else {
-    }
-    var tmp0_other_with_cast = other instanceof PrintStatement ? other : THROW_CCE();
-    if (!equals(this.expr_1, tmp0_other_with_cast.expr_1))
-      return false;
-    return true;
-  };
-  PrintStatement.$metadata$ = {
-    simpleName: 'PrintStatement',
-    kind: 'class',
-    interfaces: []
-  };
-  function ExpressionStatement(expr) {
-    Statement.call(this);
-    this.expr_1 = expr;
-  }
-  ExpressionStatement.prototype._get_expr__796545782_d68qnq_k$ = function () {
-    return this.expr_1;
-  };
-  ExpressionStatement.prototype.toString = function () {
-    return 'ExpressionStatement(expr=' + this.expr_1 + ')';
-  };
-  ExpressionStatement.prototype.hashCode = function () {
-    return hashCode(this.expr_1);
-  };
-  ExpressionStatement.prototype.equals = function (other) {
-    if (this === other)
-      return true;
-    if (!(other instanceof ExpressionStatement))
-      return false;
-    else {
-    }
-    var tmp0_other_with_cast = other instanceof ExpressionStatement ? other : THROW_CCE();
-    if (!equals(this.expr_1, tmp0_other_with_cast.expr_1))
-      return false;
-    return true;
-  };
-  ExpressionStatement.$metadata$ = {
-    simpleName: 'ExpressionStatement',
-    kind: 'class',
-    interfaces: []
-  };
-  function BlockStatement(declarations) {
-    Statement.call(this);
-    this.declarations_1 = declarations;
-  }
-  BlockStatement.prototype._get_declarations__260996658_4be2b6_k$ = function () {
-    return this.declarations_1;
-  };
-  BlockStatement.prototype.toString = function () {
-    return 'BlockStatement(declarations=' + this.declarations_1 + ')';
-  };
-  BlockStatement.prototype.hashCode = function () {
-    return hashCode(this.declarations_1);
-  };
-  BlockStatement.prototype.equals = function (other) {
-    if (this === other)
-      return true;
-    if (!(other instanceof BlockStatement))
-      return false;
-    else {
-    }
-    var tmp0_other_with_cast = other instanceof BlockStatement ? other : THROW_CCE();
-    if (!equals(this.declarations_1, tmp0_other_with_cast.declarations_1))
-      return false;
-    return true;
-  };
-  BlockStatement.$metadata$ = {
-    simpleName: 'BlockStatement',
-    kind: 'class',
-    interfaces: []
-  };
-  function _get_operatorMapping__1592820167() {
-    init_properties_Expressions_kt_3704108793();
-    return operatorMapping;
-  }
-  var operatorMapping;
-  function Expression() {
-    AbstractSyntaxNode.call(this);
-  }
-  Expression.$metadata$ = {
-    simpleName: 'Expression',
-    kind: 'class',
-    interfaces: []
-  };
-  function Value() {
-    Expression.call(this);
-  }
-  Value.$metadata$ = {
-    simpleName: 'Value',
-    kind: 'class',
-    interfaces: []
-  };
-  function NilValue() {
-    NilValue_instance = this;
-    Value.call(this);
-  }
-  NilValue.$metadata$ = {
-    simpleName: 'NilValue',
-    kind: 'object',
-    interfaces: []
-  };
-  var NilValue_instance;
-  function NilValue_getInstance() {
-    if (NilValue_instance == null)
-      new NilValue();
-    return NilValue_instance;
-  }
-  function BooleanValue(value) {
-    Value.call(this);
-    this.value_1 = value;
-  }
-  BooleanValue.prototype._get_value__3683422336_a43j40_k$ = function () {
-    return this.value_1;
-  };
-  BooleanValue.prototype.toString = function () {
-    return 'BooleanValue(value=' + this.value_1 + ')';
-  };
-  BooleanValue.prototype.hashCode = function () {
-    return this.value_1 | 0;
-  };
-  BooleanValue.prototype.equals = function (other) {
-    if (this === other)
-      return true;
-    if (!(other instanceof BooleanValue))
-      return false;
-    else {
-    }
-    var tmp0_other_with_cast = other instanceof BooleanValue ? other : THROW_CCE();
-    if (!(this.value_1 === tmp0_other_with_cast.value_1))
-      return false;
-    return true;
-  };
-  BooleanValue.$metadata$ = {
-    simpleName: 'BooleanValue',
-    kind: 'class',
-    interfaces: []
-  };
-  function NumericValue(value) {
-    Value.call(this);
-    this.value_1 = value;
-  }
-  NumericValue.prototype._get_value__3683422336_a43j40_k$ = function () {
-    return this.value_1;
-  };
-  NumericValue.prototype.toString = function () {
-    return 'NumericValue(value=' + this.value_1 + ')';
-  };
-  NumericValue.prototype.hashCode = function () {
-    return getNumberHashCode(this.value_1);
-  };
-  NumericValue.prototype.equals = function (other) {
-    if (this === other)
-      return true;
-    if (!(other instanceof NumericValue))
-      return false;
-    else {
-    }
-    var tmp0_other_with_cast = other instanceof NumericValue ? other : THROW_CCE();
-    if (!equals(this.value_1, tmp0_other_with_cast.value_1))
-      return false;
-    return true;
-  };
-  NumericValue.$metadata$ = {
-    simpleName: 'NumericValue',
-    kind: 'class',
-    interfaces: []
-  };
-  function StringValue(value) {
-    Value.call(this);
-    this.value_1 = value;
-  }
-  StringValue.prototype._get_value__3683422336_a43j40_k$ = function () {
-    return this.value_1;
-  };
-  StringValue.prototype.toString = function () {
-    return 'StringValue(value=' + this.value_1 + ')';
-  };
-  StringValue.prototype.hashCode = function () {
-    return getStringHashCode(this.value_1);
-  };
-  StringValue.prototype.equals = function (other) {
-    if (this === other)
-      return true;
-    if (!(other instanceof StringValue))
-      return false;
-    else {
-    }
-    var tmp0_other_with_cast = other instanceof StringValue ? other : THROW_CCE();
-    if (!(this.value_1 === tmp0_other_with_cast.value_1))
-      return false;
-    return true;
-  };
-  StringValue.$metadata$ = {
-    simpleName: 'StringValue',
-    kind: 'class',
-    interfaces: []
-  };
-  function ObjectValue() {
-  }
-  ObjectValue.$metadata$ = {
-    simpleName: 'ObjectValue',
-    kind: 'object',
-    interfaces: []
-  };
-  function FunctionValue(argNames, body) {
-    Value.call(this);
-    this.argNames_1 = argNames;
-    this.body_1 = body;
-    this.argNumber_1 = this.argNames_1._get_size__809037418_ddoh9m_k$();
-  }
-  FunctionValue.prototype._get_argNames__2613895033_rsv7nr_k$ = function () {
-    return this.argNames_1;
-  };
-  FunctionValue.prototype._get_body__793495785_d4fd9l_k$ = function () {
-    return this.body_1;
-  };
-  FunctionValue.prototype._get_argNumber__4293816562_onwu_k$ = function () {
-    return this.argNumber_1;
-  };
-  FunctionValue.prototype.toString = function () {
-    return 'FunctionValue(args = ' + this.argNames_1 + ', body = ' + this.body_1 + ')';
-  };
-  FunctionValue.prototype.hashCode = function () {
-    var result = hashCode(this.argNames_1);
-    result = imul(result, 31) + this.body_1.hashCode() | 0;
-    return result;
-  };
-  FunctionValue.prototype.equals = function (other) {
-    if (this === other)
-      return true;
-    if (!(other instanceof FunctionValue))
-      return false;
-    else {
-    }
-    var tmp0_other_with_cast = other instanceof FunctionValue ? other : THROW_CCE();
-    if (!equals(this.argNames_1, tmp0_other_with_cast.argNames_1))
-      return false;
-    if (!this.body_1.equals(tmp0_other_with_cast.body_1))
-      return false;
-    return true;
-  };
-  FunctionValue.$metadata$ = {
-    simpleName: 'FunctionValue',
-    kind: 'class',
-    interfaces: []
-  };
-  function FunctionCallExpression(function_0, arguments_0) {
-    Expression.call(this);
-    this.function_1 = function_0;
-    this.arguments_1 = arguments_0;
-  }
-  FunctionCallExpression.prototype._get_function__1341261555_m6jw1f_k$ = function () {
-    return this.function_1;
-  };
-  FunctionCallExpression.prototype._get_arguments__15705019_9cm2j_k$ = function () {
-    return this.arguments_1;
-  };
-  FunctionCallExpression.prototype.toString = function () {
-    return 'FunctionCallExpression(function=' + this.function_1 + ', arguments=' + this.arguments_1 + ')';
-  };
-  FunctionCallExpression.prototype.hashCode = function () {
-    var result = hashCode(this.function_1);
-    result = imul(result, 31) + hashCode(this.arguments_1) | 0;
-    return result;
-  };
-  FunctionCallExpression.prototype.equals = function (other) {
-    if (this === other)
-      return true;
-    if (!(other instanceof FunctionCallExpression))
-      return false;
-    else {
-    }
-    var tmp0_other_with_cast = other instanceof FunctionCallExpression ? other : THROW_CCE();
-    if (!equals(this.function_1, tmp0_other_with_cast.function_1))
-      return false;
-    if (!equals(this.arguments_1, tmp0_other_with_cast.arguments_1))
-      return false;
-    return true;
-  };
-  FunctionCallExpression.$metadata$ = {
-    simpleName: 'FunctionCallExpression',
-    kind: 'class',
-    interfaces: []
-  };
-  function AssignmentExpression(identifier, expr) {
-    Expression.call(this);
-    this.identifier_1 = identifier;
-    this.expr_1 = expr;
-  }
-  AssignmentExpression.prototype._get_identifier__3776854274_8kgyke_k$ = function () {
-    return this.identifier_1;
-  };
-  AssignmentExpression.prototype._get_expr__796545782_d68qnq_k$ = function () {
-    return this.expr_1;
-  };
-  AssignmentExpression.prototype.toString = function () {
-    return 'AssignmentExpression(identifier=' + this.identifier_1 + ', expr=' + this.expr_1 + ')';
-  };
-  AssignmentExpression.prototype.hashCode = function () {
-    var result = this.identifier_1.hashCode();
-    result = imul(result, 31) + hashCode(this.expr_1) | 0;
-    return result;
-  };
-  AssignmentExpression.prototype.equals = function (other) {
-    if (this === other)
-      return true;
-    if (!(other instanceof AssignmentExpression))
-      return false;
-    else {
-    }
-    var tmp0_other_with_cast = other instanceof AssignmentExpression ? other : THROW_CCE();
-    if (!this.identifier_1.equals(tmp0_other_with_cast.identifier_1))
-      return false;
-    if (!equals(this.expr_1, tmp0_other_with_cast.expr_1))
-      return false;
-    return true;
-  };
-  AssignmentExpression.$metadata$ = {
-    simpleName: 'AssignmentExpression',
-    kind: 'class',
-    interfaces: []
-  };
-  function UnaryOperatorExpression(operatorType, expr) {
-    Expression.call(this);
-    this.operatorType_1 = operatorType;
-    this.expr_1 = expr;
-  }
-  UnaryOperatorExpression.prototype._get_operatorType__924874509_fan9ql_k$ = function () {
-    return this.operatorType_1;
-  };
-  UnaryOperatorExpression.prototype._get_expr__796545782_d68qnq_k$ = function () {
-    return this.expr_1;
-  };
-  UnaryOperatorExpression.prototype.toString = function () {
-    return 'UnaryOperatorExpression(operatorType=' + this.operatorType_1 + ', expr=' + this.expr_1 + ')';
-  };
-  UnaryOperatorExpression.prototype.hashCode = function () {
-    var result = this.operatorType_1.hashCode();
-    result = imul(result, 31) + hashCode(this.expr_1) | 0;
-    return result;
-  };
-  UnaryOperatorExpression.prototype.equals = function (other) {
-    if (this === other)
-      return true;
-    if (!(other instanceof UnaryOperatorExpression))
-      return false;
-    else {
-    }
-    var tmp0_other_with_cast = other instanceof UnaryOperatorExpression ? other : THROW_CCE();
-    if (!this.operatorType_1.equals(tmp0_other_with_cast.operatorType_1))
-      return false;
-    if (!equals(this.expr_1, tmp0_other_with_cast.expr_1))
-      return false;
-    return true;
-  };
-  UnaryOperatorExpression.$metadata$ = {
-    simpleName: 'UnaryOperatorExpression',
-    kind: 'class',
-    interfaces: []
-  };
-  function BinaryOperatorExpression(operatorType, lhs, rhs) {
-    Expression.call(this);
-    this.operatorType_1 = operatorType;
-    this.lhs_1 = lhs;
-    this.rhs_1 = rhs;
-  }
-  BinaryOperatorExpression.prototype._get_operatorType__924874509_fan9ql_k$ = function () {
-    return this.operatorType_1;
-  };
-  BinaryOperatorExpression.prototype._get_lhs__857172218_e6c6be_k$ = function () {
-    return this.lhs_1;
-  };
-  BinaryOperatorExpression.prototype._get_rhs__857350964_e6g08k_k$ = function () {
-    return this.rhs_1;
-  };
-  BinaryOperatorExpression.prototype.toString = function () {
-    return 'BinaryOperatorExpression(operatorType=' + this.operatorType_1 + ', lhs=' + this.lhs_1 + ', rhs=' + this.rhs_1 + ')';
-  };
-  BinaryOperatorExpression.prototype.hashCode = function () {
-    var result = this.operatorType_1.hashCode();
-    result = imul(result, 31) + hashCode(this.lhs_1) | 0;
-    result = imul(result, 31) + hashCode(this.rhs_1) | 0;
-    return result;
-  };
-  BinaryOperatorExpression.prototype.equals = function (other) {
-    if (this === other)
-      return true;
-    if (!(other instanceof BinaryOperatorExpression))
-      return false;
-    else {
-    }
-    var tmp0_other_with_cast = other instanceof BinaryOperatorExpression ? other : THROW_CCE();
-    if (!this.operatorType_1.equals(tmp0_other_with_cast.operatorType_1))
-      return false;
-    if (!equals(this.lhs_1, tmp0_other_with_cast.lhs_1))
-      return false;
-    if (!equals(this.rhs_1, tmp0_other_with_cast.rhs_1))
-      return false;
-    return true;
-  };
-  BinaryOperatorExpression.$metadata$ = {
-    simpleName: 'BinaryOperatorExpression',
-    kind: 'class',
-    interfaces: []
-  };
-  function IdentifierExpression_init_$Init$(token, $this) {
-    IdentifierExpression.call($this, token._get_name__804168992_das4rk_k$());
-    return $this;
-  }
-  function IdentifierExpression_init_$Create$(token) {
-    return IdentifierExpression_init_$Init$(token, Object.create(IdentifierExpression.prototype));
-  }
-  function IdentifierExpression(name) {
-    Expression.call(this);
-    this.name_1 = name;
-  }
-  IdentifierExpression.prototype._get_name__804168992_das4rk_k$ = function () {
-    return this.name_1;
-  };
-  IdentifierExpression.prototype.toString = function () {
-    return 'IdentifierExpression(name=' + this.name_1 + ')';
-  };
-  IdentifierExpression.prototype.hashCode = function () {
-    return getStringHashCode(this.name_1);
-  };
-  IdentifierExpression.prototype.equals = function (other) {
-    if (this === other)
-      return true;
-    if (!(other instanceof IdentifierExpression))
-      return false;
-    else {
-    }
-    var tmp0_other_with_cast = other instanceof IdentifierExpression ? other : THROW_CCE();
-    if (!(this.name_1 === tmp0_other_with_cast.name_1))
-      return false;
-    return true;
-  };
-  IdentifierExpression.$metadata$ = {
-    simpleName: 'IdentifierExpression',
-    kind: 'class',
-    interfaces: []
-  };
-  var OperatorType_Bang_instance;
-  var OperatorType_Plus_instance;
-  var OperatorType_Minus_instance;
-  var OperatorType_Star_instance;
-  var OperatorType_Slash_instance;
-  var OperatorType_Greater_instance;
-  var OperatorType_GreaterEqual_instance;
-  var OperatorType_Less_instance;
-  var OperatorType_LessEqual_instance;
-  var OperatorType_BangEqual_instance;
-  var OperatorType_EqualEqual_instance;
-  var OperatorType_Or_instance;
-  var OperatorType_And_instance;
-  var OperatorType_entriesInitialized;
-  function OperatorType_initEntries() {
-    if (OperatorType_entriesInitialized)
-      return Unit_getInstance();
-    OperatorType_entriesInitialized = true;
-    OperatorType_Bang_instance = new OperatorType('Bang', 0);
-    OperatorType_Plus_instance = new OperatorType('Plus', 1);
-    OperatorType_Minus_instance = new OperatorType('Minus', 2);
-    OperatorType_Star_instance = new OperatorType('Star', 3);
-    OperatorType_Slash_instance = new OperatorType('Slash', 4);
-    OperatorType_Greater_instance = new OperatorType('Greater', 5);
-    OperatorType_GreaterEqual_instance = new OperatorType('GreaterEqual', 6);
-    OperatorType_Less_instance = new OperatorType('Less', 7);
-    OperatorType_LessEqual_instance = new OperatorType('LessEqual', 8);
-    OperatorType_BangEqual_instance = new OperatorType('BangEqual', 9);
-    OperatorType_EqualEqual_instance = new OperatorType('EqualEqual', 10);
-    OperatorType_Or_instance = new OperatorType('Or', 11);
-    OperatorType_And_instance = new OperatorType('And', 12);
-  }
-  function OperatorType(name, ordinal) {
-    Enum.call(this, name, ordinal);
-  }
-  OperatorType.$metadata$ = {
-    simpleName: 'OperatorType',
-    kind: 'class',
-    interfaces: []
-  };
-  function OperatorType_Bang_getInstance() {
-    OperatorType_initEntries();
-    return OperatorType_Bang_instance;
-  }
-  function OperatorType_Plus_getInstance() {
-    OperatorType_initEntries();
-    return OperatorType_Plus_instance;
-  }
-  function OperatorType_Minus_getInstance() {
-    OperatorType_initEntries();
-    return OperatorType_Minus_instance;
-  }
-  function OperatorType_Star_getInstance() {
-    OperatorType_initEntries();
-    return OperatorType_Star_instance;
-  }
-  function OperatorType_Slash_getInstance() {
-    OperatorType_initEntries();
-    return OperatorType_Slash_instance;
-  }
-  function OperatorType_Greater_getInstance() {
-    OperatorType_initEntries();
-    return OperatorType_Greater_instance;
-  }
-  function OperatorType_GreaterEqual_getInstance() {
-    OperatorType_initEntries();
-    return OperatorType_GreaterEqual_instance;
-  }
-  function OperatorType_Less_getInstance() {
-    OperatorType_initEntries();
-    return OperatorType_Less_instance;
-  }
-  function OperatorType_LessEqual_getInstance() {
-    OperatorType_initEntries();
-    return OperatorType_LessEqual_instance;
-  }
-  function OperatorType_BangEqual_getInstance() {
-    OperatorType_initEntries();
-    return OperatorType_BangEqual_instance;
-  }
-  function OperatorType_EqualEqual_getInstance() {
-    OperatorType_initEntries();
-    return OperatorType_EqualEqual_instance;
-  }
-  function OperatorType_Or_getInstance() {
-    OperatorType_initEntries();
-    return OperatorType_Or_instance;
-  }
-  function OperatorType_And_getInstance() {
-    OperatorType_initEntries();
-    return OperatorType_And_instance;
-  }
-  var properties_initialized_Expressions_kt_1116722517;
-  function init_properties_Expressions_kt_3704108793() {
-    if (!properties_initialized_Expressions_kt_1116722517) {
-      properties_initialized_Expressions_kt_1116722517 = true;
-      operatorMapping = mapOf([to(getKClass(BangLexerToken), OperatorType_Bang_getInstance()), to(getKClass(PlusLexerToken), OperatorType_Plus_getInstance()), to(getKClass(MinusLexerToken), OperatorType_Minus_getInstance()), to(getKClass(StarLexerToken), OperatorType_Star_getInstance()), to(getKClass(SlashLexerToken), OperatorType_Slash_getInstance()), to(getKClass(GreaterLexerToken), OperatorType_Greater_getInstance()), to(getKClass(GreaterEqualLexerToken), OperatorType_GreaterEqual_getInstance()), to(getKClass(LessLexerToken), OperatorType_Less_getInstance()), to(getKClass(LessEqualLexerToken), OperatorType_LessEqual_getInstance()), to(getKClass(BangEqualLexerToken), OperatorType_BangEqual_getInstance()), to(getKClass(EqualEqualLexerToken), OperatorType_EqualEqual_getInstance()), to(getKClass(OrLexerToken), OperatorType_Or_getInstance()), to(getKClass(AndLexerToken), OperatorType_And_getInstance())]);
-    }
-  }
   function _get_defaultBinaryOperatorCombiner__2595844184() {
     init_properties_BinaryExpression_kt_2100230273();
     return defaultBinaryOperatorCombiner;
@@ -4369,7 +4441,7 @@
         tmp$ret$3 = tmp$ret$6;
         break $l$block_6;
       }
-      var function_0 = new FunctionValue(tmp$ret$3, bodyToken._get_node__804577417_db0vwp_k$());
+      var function_0 = new LoxFunctionValue(tmp$ret$3, bodyToken._get_node__804577417_db0vwp_k$());
       Unit_getInstance();
       var tmp$ret$7;
       $l$block_7: {
@@ -5564,13 +5636,18 @@
       Unit_getInstance();
       var tmp;
       if (currentToken_2_2 instanceof IdentifierLexerToken) {
-        var tmp$ret$0;
-        $l$block: {
+        var tmp$ret$1;
+        $l$block_0: {
           var tmp0__anonymous__3_3_1682276431 = currentToken_2_2;
-          tmp$ret$0 = new NodeToken(IdentifierExpression_init_$Create$(tmp0__anonymous__3_3_1682276431));
-          break $l$block;
+          var tmp$ret$0;
+          $l$block: {
+            tmp$ret$0 = new IdentifierExpression(tmp0__anonymous__3_3_1682276431._get_name__804168992_das4rk_k$());
+            break $l$block;
+          }
+          tmp$ret$1 = new NodeToken(tmp$ret$0);
+          break $l$block_0;
         }
-        return new Matched(tmp$ret$0, ctx.move_1zys1_k$());
+        return new Matched(tmp$ret$1, ctx.move_1zys1_k$());
       } else {
       }
       return Unmatched_getInstance();
